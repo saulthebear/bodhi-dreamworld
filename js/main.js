@@ -7,12 +7,25 @@ const engine = new Engine({ update: update, render: render, fps: 1 })
 const game = new Game()
 
 function update() {
-  game.update
+  game.update()
 }
 
 function render() {
-  renderer.clearCanvas(game.color)
+  // Clear the screen
+  renderer.fill(game.color)
   renderer.render()
 }
 
+function handleResize() {
+  renderer.resizeCanvas(
+    document.documentElement.clientWidth,
+    document.documentElement.clientHeight,
+    game.world.aspectRatio
+  )
+  renderer.render()
+}
+
+window.addEventListener("resize", handleResize)
+
+handleResize()
 engine.start()

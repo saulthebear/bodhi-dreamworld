@@ -1,23 +1,25 @@
+/*
+  Handles rendering to the canvas
+  When an something is drawn it is first added to an offscreen canvas (buffer),
+  and that buffer is drawn to the onscreen canvas only when render() is called
+*/
+
 export class Renderer {
   // Offscreen canvas to prerender to.
   // https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Optimizing_canvas
   #buffer
   #ctx
 
-  constructor(canvas, aspectRatio) {
+  constructor(canvas) {
     this.#buffer = document.createElement("canvas").getContext("2d")
     this.#ctx = canvas.getContext("2d")
-
-    this.aspectRatio = aspectRatio
-    this.#resizeCanvas()
   }
 
   render() {
-    this.clearCanvas(this.#randomColor())
     this.#ctx.drawImage(this.#buffer.canvas, 0, 0)
   }
 
-  clearCanvas(color) {
+  fill(color) {
     this.#buffer.fillStyle = color
     this.#buffer.fillRect(
       0,
@@ -27,29 +29,20 @@ export class Renderer {
     )
   }
 
-  #randomColor() {
-    const red = Math.floor(Math.random() * 256)
-    const green = Math.floor(Math.random() * 256)
-    const blue = Math.floor(Math.random() * 256)
-    const alpha = Math.random()
-    return `rgba(${red}, ${green}, ${blue}, ${alpha})`
-  }
+  resizeCanvas(availableWidth, availableHeight, aspectRatio) {
+    let newWidth = availableWidth
+    let newHeight = availableHeight
 
-  #resizeCanvas() {
-    // Max size is based on browser window size
-    const maxWidth = document.documentElement.clientWidth * this.aspectRatio
-    const maxHeight = document.documentElement.clientHeight
-    let newCanvasWidth = maxWidth
-    let newCanvasHeight = maxHeight
-    // Make canvas the maximum size it can be in the window while keeping its aspect ratio
-    if (maxWidth > maxHeight) {
-      newCanvasWidth = this.aspectRatio * maxHeight
+    if (availableWidth / availableHeight > aspectRatio) {
+      newWidth = aspectRatio * availableHeight
     } else {
-      newCanvasHeight = maxWidth / this.aspectRatio
+      newHeight = availableWidth / aspectRatio
     }
-    this.#ctx.canvas.width = newCanvasWidth
-    this.#ctx.canvas.height = newCanvasHeight
-    this.#buffer.canvas.width = newCanvasWidth
-    this.#buffer.canvas.height = newCanvasHeight
+
+    this.#ctx.canvas.width = newWidth
+    this.#ctx.canvas.height = newHeight
+
+    this.#buffer.canvas.width = newWidth
+    this.#buffer.canvas.height = newHeight
   }
 }
