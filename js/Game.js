@@ -18,12 +18,23 @@ export class Game {
 }
 
 class GameWorld {
-  constructor(width, height) {
-    this.width = width
-    this.height = height
+  constructor() {
+    this.width = 160
+    this.height = 192
+    this.player = new Player()
   }
 
   get aspectRatio() {
     return this.width / this.height
+  }
+}
+
+class Player {
+  constructor() {
+    this.color = "white"
+    this.height = 16
+    this.width = 16
+    this.x = 5
+    this.y = 5
   }
 }
