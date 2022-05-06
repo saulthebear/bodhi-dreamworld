@@ -10,13 +10,26 @@ export class Renderer {
   #buffer
   #ctx
 
-  constructor(canvas) {
+  constructor(canvas, worldWidth, worldHeight) {
     this.#buffer = document.createElement("canvas").getContext("2d")
     this.#ctx = canvas.getContext("2d")
+
+    this.#buffer.canvas.width = worldWidth
+    this.#buffer.canvas.height = worldHeight
   }
 
   render() {
-    this.#ctx.drawImage(this.#buffer.canvas, 0, 0)
+    this.#ctx.drawImage(
+      this.#buffer.canvas,
+      0,
+      0,
+      this.#buffer.canvas.width,
+      this.#buffer.canvas.height,
+      0,
+      0,
+      this.#ctx.canvas.width,
+      this.#ctx.canvas.height
+    )
   }
 
   fill(color) {
@@ -27,6 +40,15 @@ export class Renderer {
       this.#buffer.canvas.width,
       this.#buffer.canvas.height
     )
+  }
+
+  drawRectangle(x, y, width, height, color) {
+    this.#buffer.fillStyle = color
+    this.#buffer.fillRect(x, y, width, height)
+  }
+
+  drawObject({ x, y, width, height, color }) {
+    this.drawRectangle(x, y, width, height, color)
   }
 
   resizeCanvas(availableWidth, availableHeight, aspectRatio) {
@@ -42,7 +64,6 @@ export class Renderer {
     this.#ctx.canvas.width = newWidth
     this.#ctx.canvas.height = newHeight
 
-    this.#buffer.canvas.width = newWidth
-    this.#buffer.canvas.height = newHeight
+    this.#ctx.imageSmoothingEnabled = false
   }
 }
