@@ -1,30 +1,18 @@
-const canvas = document.querySelector("canvas")
+import { Renderer } from "./Renderer.js"
+import { Engine } from "./Engine.js"
+import { Game } from "./Game.js"
 
-class Renderer {
-  constructor(canvas, aspectRatio) {
-    this.canvas = canvas
-    this.aspectRatio = aspectRatio
-  }
+const renderer = new Renderer(document.querySelector("canvas"), 0.83)
+const engine = new Engine({ update: update, render: render, fps: 1 })
+const game = new Game()
 
-  resize() {
-    // Max size is based on browser window size
-    const maxWidth = window.innerWidth * this.aspectRatio
-    const maxHeight = window.innerHeight
-
-    let newCanvasWidth = maxWidth
-    let newCanvasHeight = maxHeight
-
-    // Make canvas the maximum size it can be in the window while keeping its aspect ratio
-    if (maxWidth > maxHeight) {
-      newCanvasWidth = this.aspectRatio * maxHeight
-    } else {
-      newCanvasHeight = maxWidth / this.aspectRatio
-    }
-
-    this.canvas.width = newCanvasWidth
-    this.canvas.height = newCanvasHeight
-  }
+function update() {
+  game.update
 }
 
-const renderer = new Renderer(canvas, 0.83)
-renderer.resize()
+function render() {
+  renderer.clearCanvas(game.color)
+  renderer.render()
+}
+
+engine.start()
