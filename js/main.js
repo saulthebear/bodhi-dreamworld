@@ -15,13 +15,18 @@ const controller = new Controller()
 function update() {
   if (controller.leftActive) game.world.player.moveLeft()
   if (controller.rightActive) game.world.player.moveRight()
-  if (controller.upActive) game.world.player.jump()
+  if (controller.upActive) {
+    game.world.player.jump()
+    // Don't continually jump if key is held down
+    controller.upActive = false
+  }
   game.update()
 }
 
 function render() {
   // Clear the screen
   renderer.fill(game.world.backgroundColor)
+
   // Draw the player
   renderer.drawObject(game.world.player)
 
