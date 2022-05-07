@@ -61,6 +61,7 @@ class GameWorld {
       // Place object on bottom of world and stop its downwards velocity
       object.y = this.height - object.height
       object.yVelocity = 0
+      object.stopJump()
     }
   }
 
@@ -72,6 +73,8 @@ class GameWorld {
 }
 
 class Player {
+  #isJumping = false
+
   constructor(x, y) {
     this.color = "white"
 
@@ -88,5 +91,22 @@ class Player {
   update() {
     this.y += this.yVelocity
     this.x += this.xVelocity
+  }
+
+  moveLeft() {}
+
+  moveRight() {}
+
+  jump() {
+    // Disallow jumping in the air
+    if (!this.#isJumping) {
+      this.yVelocity -= 20
+      this.#isJumping = true
+    }
+  }
+
+  // Called when player hits the ground and can start jumping again
+  stopJump() {
+    this.#isJumping = false
   }
 }

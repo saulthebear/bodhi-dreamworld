@@ -12,6 +12,7 @@ const renderer = new Renderer(
 
 function update() {
   game.update()
+  game.world.player.jump()
 }
 
 function render() {
