@@ -93,9 +93,13 @@ class Player {
     this.x += this.xVelocity
   }
 
-  moveLeft() {}
+  moveLeft() {
+    this.xVelocity -= 0.5
+  }
 
-  moveRight() {}
+  moveRight() {
+    this.xVelocity += 0.5
+  }
 
   jump() {
     // Disallow jumping in the air

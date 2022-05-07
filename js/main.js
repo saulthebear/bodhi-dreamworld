@@ -12,7 +12,16 @@ const renderer = new Renderer(
 
 function update() {
   game.update()
-  game.world.player.jump()
+
+  const player = game.world.player
+  const randomOption = Math.floor(Math.random() * 3)
+  if (randomOption === 0) {
+    player.jump()
+  } else if (randomOption === 1) {
+    player.moveLeft()
+  } else {
+    player.moveRight()
+  }
 }
 
 function render() {
