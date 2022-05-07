@@ -1,6 +1,7 @@
 import { Renderer } from "./Renderer.js"
 import { Engine } from "./Engine.js"
 import { Game } from "./Game.js"
+import { Controller } from "./Controller.js"
 
 const engine = new Engine({ update: update, render: render, fps: 60 })
 const game = new Game()
@@ -9,26 +10,22 @@ const renderer = new Renderer(
   game.world.width,
   game.world.height
 )
+const controller = new Controller()
 
 function update() {
+  if (controller.leftActive) game.world.player.moveLeft()
+  if (controller.rightActive) game.world.player.moveRight()
+  if (controller.upActive) game.world.player.jump()
   game.update()
-
-  const player = game.world.player
-  const randomOption = Math.floor(Math.random() * 3)
-  if (randomOption === 0) {
-    player.jump()
-  } else if (randomOption === 1) {
-    player.moveLeft()
-  } else {
-    player.moveRight()
-  }
 }
 
 function render() {
   // Clear the screen
   renderer.fill(game.world.backgroundColor)
+  // Draw the player
   renderer.drawObject(game.world.player)
-  // console.log(game.world.player)
+
+  // Output on screen
   renderer.render()
 }
 
@@ -42,7 +39,13 @@ function handleResize() {
   renderer.render()
 }
 
+function handleInputEvent({ type, key }) {
+  controller.handleKeyPress(type, key)
+}
+
 window.addEventListener("resize", handleResize)
+window.addEventListener("keydown", handleInputEvent)
+window.addEventListener("keyup", handleInputEvent)
 
 handleResize()
 engine.start()
