@@ -17,7 +17,10 @@ class GameWorld {
 
     this.player = new Player(16, 32)
 
+    // Downward velocity added every tick
     this.gravity = 3
+    // Multiplier applied to velocity every tick
+    this.friction = 0.75
   }
 
   get aspectRatio() {
@@ -58,7 +61,12 @@ class GameWorld {
 
   update() {
     this.player.yVelocity += this.gravity
+
     this.player.update()
+
+    this.player.xVelocity *= this.friction
+    this.player.yVelocity *= this.friction
+
     this.collideWithWorldEdge(this.player)
   }
 }
@@ -80,16 +88,16 @@ class Player {
   }
 
   update() {
-    this.y += this.yVelocity
-    this.x += this.xVelocity
+    this.x = Math.round(this.x + this.xVelocity)
+    this.y = Math.round(this.y + this.yVelocity)
   }
 
   moveLeft() {
-    this.xVelocity -= 0.5
+    this.xVelocity -= 0.6
   }
 
   moveRight() {
-    this.xVelocity += 0.5
+    this.xVelocity += 0.6
   }
 
   jump() {
