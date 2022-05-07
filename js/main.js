@@ -2,7 +2,7 @@ import { Renderer } from "./Renderer.js"
 import { Engine } from "./Engine.js"
 import { Game } from "./Game.js"
 
-const engine = new Engine({ update: update, render: render, fps: 1 })
+const engine = new Engine({ update: update, render: render, fps: 60 })
 const game = new Game()
 const renderer = new Renderer(
   document.querySelector("canvas"),
@@ -26,7 +26,7 @@ function update() {
 
 function render() {
   // Clear the screen
-  renderer.fill(game.color)
+  renderer.fill(game.world.backgroundColor)
   renderer.drawObject(game.world.player)
   // console.log(game.world.player)
   renderer.render()
