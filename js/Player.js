@@ -1,16 +1,22 @@
 import { GameObject } from "./GameObject.js"
+import { Sprite } from "./Sprite.js"
 
 export class Player extends GameObject {
   #isJumping = false
+  #size
 
-  constructor(x, y) {
+  constructor(x, y, size) {
     const color = "white"
-    const size = 16
     // Object.assign(this, new GameObject(x, y, size, size, color))
     super(x, y, size, size, color)
 
     this.xVelocity = 0
     this.yVelocity = 0
+
+    this.#size = size
+    const idleRightImage = new Image()
+    idleRightImage.src = "./sprites/idle-right.png"
+    this.idleRightSprite = new Sprite(idleRightImage, 52, 12, 4, 20)
   }
 
   update() {
@@ -40,5 +46,14 @@ export class Player extends GameObject {
   // Called when player hits the ground and can start jumping again
   stopJump() {
     this.#isJumping = false
+  }
+
+  spriteFrame() {
+    const imageInfo = this.idleRightSprite.frame()
+    imageInfo.dx = this.x
+    imageInfo.dy = this.y
+    imageInfo.dWidth = this.#size + 1
+    imageInfo.dHeight = this.#size
+    return imageInfo
   }
 }

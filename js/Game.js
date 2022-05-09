@@ -4,9 +4,9 @@ import { level1String } from "./levels.js"
 
 export class Game {
   constructor() {
-    const blockSize = 8
+    const blockSize = 6
     const level1 = new Level(level1String, blockSize)
-    this.world = new GameWorld(level1)
+    this.world = new GameWorld(level1, blockSize)
   }
 
   update(timeStep) {
@@ -15,14 +15,15 @@ export class Game {
 }
 
 class GameWorld {
-  constructor(level) {
+  constructor(level, blockSize) {
     this.width = level.width
     this.height = level.height
     this.platforms = level.platforms
 
     this.backgroundColor = "rgba(0,0,0,0.2)"
 
-    this.player = new Player(level.player.x, level.player.y)
+    const playerSize = blockSize * 2
+    this.player = new Player(level.player.x, level.player.y, playerSize)
 
     // Downward velocity added every tick
     this.gravity = 3

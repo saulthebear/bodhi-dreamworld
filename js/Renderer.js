@@ -51,6 +51,20 @@ export class Renderer {
     this.drawRectangle(x, y, width, height, color)
   }
 
+  drawImage({ image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight }) {
+    this.#buffer.drawImage(
+      image,
+      sx,
+      sy,
+      sWidth,
+      sHeight,
+      dx,
+      dy,
+      dWidth,
+      dHeight
+    )
+  }
+
   resizeCanvas(availableWidth, availableHeight, aspectRatio) {
     let newWidth = availableWidth
     let newHeight = availableHeight

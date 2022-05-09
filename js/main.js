@@ -28,7 +28,8 @@ function render() {
   renderer.fill(game.world.backgroundColor)
 
   // Draw the player
-  renderer.drawObject(game.world.player)
+  // renderer.drawObject(game.world.player)
+  renderer.drawImage(game.world.player.spriteFrame())
 
   // Draw platforms
   game.world.platforms.forEach((platform) => renderer.drawObject(platform))
