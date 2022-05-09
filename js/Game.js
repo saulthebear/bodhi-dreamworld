@@ -22,7 +22,7 @@ class GameWorld {
 
     this.backgroundColor = "black"
 
-    this.player = new Player(0, 168)
+    this.player = new Player(level.player.x, level.player.y)
 
     // Downward velocity added every tick
     this.gravity = 3
@@ -93,7 +93,19 @@ class Level {
     this.#heightInBlocks = rowStrings.length - 2
     this.#blockSize = blockSize
 
-    this.#platforms = this.#createPlatforms(this.#parseLevelString(rowStrings))
+    const levelInfoObjects = this.#parseLevelString(rowStrings)
+
+    const platformInfoObjects = levelInfoObjects.filter(
+      (o) => o.type === "platform"
+    )
+    this.#platforms = this.#createPlatforms(platformInfoObjects)
+
+    const playerInfo = levelInfoObjects.filter((o) => o.type === "player")[0]
+    this.#player = { x: playerInfo.x, y: playerInfo.y }
+  }
+
+  get player() {
+    return this.#player
   }
 
   get platforms() {
@@ -114,55 +126,71 @@ class Level {
   }
 
   #parseLevelString(rowStrings) {
-    const rowsOfPlatforms = []
+    const rowsOfObjects = []
+    const objectTypeMap = Object.create(null)
+
+    objectTypeMap["="] = "platform"
+    objectTypeMap["p"] = "player"
+
+    const symbols = Object.keys(objectTypeMap)
 
     for (let i = 1; i < rowStrings.length - 1; i++) {
       const rowString = rowStrings[i]
 
-      // Holds all the start and end indices of platforms on this row
-      let rowPlatforms = []
+      // Holds all the start and end indices of objects on this row
+      let rowObjects = []
 
-      let platformStarted = false
+      let currentSymbol = null
 
       for (let j = 1; j < rowString.length; j++) {
         const block = rowString[j]
         const colIndex = j - 1
 
-        // Platform start
-        if (!platformStarted && block === "=") {
-          platformStarted = true
-          rowPlatforms.push({ start: colIndex })
+        // Object start
+        if (!currentSymbol && symbols.includes(block)) {
+          currentSymbol = block
+          rowObjects.push({ type: objectTypeMap[block], start: colIndex })
         }
 
-        // Platform end
-        if (platformStarted && block !== "=") {
-          const lastPlatform = rowPlatforms[rowPlatforms.length - 1]
-          lastPlatform.end = colIndex - 1
-          platformStarted = false
+        // Object end
+        if (currentSymbol && block !== currentSymbol) {
+          const lastObject = rowObjects[rowObjects.length - 1]
+          lastObject.end = colIndex - 1
+          currentSymbol = null
         }
       }
-      rowsOfPlatforms.push(rowPlatforms)
+      rowsOfObjects.push(rowObjects)
     }
-    return rowsOfPlatforms
+    const detailedObjects = this.#addDetail(rowsOfObjects)
+    return detailedObjects.flat()
   }
 
-  #createPlatforms(rowsOfPlatforms) {
-    const platforms = []
-    const collisions = { top: true, right: true, bottom: true, left: true }
+  #addDetail(rowsOfObjects) {
+    return rowsOfObjects.map((row, rowIndex) => {
+      if (row.length === 0) return row
 
-    for (let i = 0; i < rowsOfPlatforms.length; i++) {
-      const row = rowsOfPlatforms[i]
-      if (row.length === 0) continue
-
-      const y = i * this.#blockSize
-      row.forEach((platformInfo) => {
-        const x = platformInfo.start * this.#blockSize
-        const widthInBlocks = platformInfo.end - platformInfo.start + 1
+      const y = rowIndex * this.#blockSize
+      return row.map((simpleObject) => {
+        const x = simpleObject.start * this.#blockSize
+        const widthInBlocks = simpleObject.end - simpleObject.start + 1
         const width = widthInBlocks * this.#blockSize
-        const platform = new Platform(x, y, width, this.#blockSize, collisions)
-        platforms.push(platform)
+
+        return {
+          type: simpleObject.type,
+          x,
+          y,
+          width,
+          height: this.#blockSize,
+        }
       })
-    }
-    return platforms
+    })
+  }
+
+  #createPlatforms(platformInfoObjects) {
+    const collisions = { top: true, right: true, bottom: true, left: true }
+    return platformInfoObjects.map(
+      (info) =>
+        new Platform(info.x, info.y, info.width, info.height, collisions)
+    )
   }
 }
