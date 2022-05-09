@@ -20,7 +20,7 @@ class GameWorld {
     this.height = level.height
     this.platforms = level.platforms
 
-    this.backgroundColor = "black"
+    this.backgroundColor = "rgba(0,0,0,0.2)"
 
     this.player = new Player(level.player.x, level.player.y)
 

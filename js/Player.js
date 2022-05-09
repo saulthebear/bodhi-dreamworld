@@ -22,11 +22,11 @@ export class Player extends GameObject {
   }
 
   moveLeft() {
-    this.xVelocity -= 0.6
+    this.xVelocity -= 0.7
   }
 
   moveRight() {
-    this.xVelocity += 0.6
+    this.xVelocity += 0.7
   }
 
   jump() {
