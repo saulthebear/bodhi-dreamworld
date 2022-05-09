@@ -78,55 +78,6 @@ class GameWorld {
 
     this.platforms.forEach((platform) => platform.applyColliders(this.player))
   }
-
-  // #addPlatform(
-  //   x,
-  //   y,
-  //   width,
-  //   height,
-  //   collisionDirections = { top: true, right: true, bottom: true, left: true }
-  // ) {
-  //   this.platforms.push(new Platform(x, y, width, height, collisionDirections))
-  // }
-
-  // #constructLevel() {
-  // // floor #1
-  // this.#addPlatform(0, 208, 160, 8, { top: true })
-
-  // // #2
-  // this.#addPlatform(81, 192, 16, 16)
-
-  // // #3 & #4
-  // this.#addPlatform(120, 192, 40, 16, { left: true, top: true })
-  // this.#addPlatform(136, 176, 24, 16, { left: true, top: true })
-
-  // // #5 & #6
-  // this.#addPlatform(56, 160, 56, 8)
-  // this.#addPlatform(56, 144, 32, 16)
-
-  // // #7
-  // this.#addPlatform(0, 120, 32, 8)
-
-  // // #8
-  // this.#addPlatform(56, 104, 32, 8)
-
-  // // #9
-  // this.#addPlatform(112, 96, 48, 8)
-
-  // // #10
-  // this.#addPlatform(0, 72, 48, 8)
-
-  // // #11
-  // this.#addPlatform(56, 72, 16, 8)
-  // // #12
-  // this.#addPlatform(144, 64, 16, 8)
-  // // #13
-  // this.#addPlatform(96, 56, 32, 8)
-  // // #14
-  // this.#addPlatform(72, 32, 24, 8)
-  // // #15
-  // this.#addPlatform(0, 40, 48, 8)
-  // }
 }
 
 class Level {
@@ -143,7 +94,6 @@ class Level {
     this.#blockSize = blockSize
 
     this.#platforms = this.#createPlatforms(this.#parseLevelString(rowStrings))
-    // console.log(this.#platforms)
   }
 
   get platforms() {
@@ -193,7 +143,6 @@ class Level {
       }
       rowsOfPlatforms.push(rowPlatforms)
     }
-    console.log(rowsOfPlatforms)
     return rowsOfPlatforms
   }
 
@@ -211,15 +160,9 @@ class Level {
         const widthInBlocks = platformInfo.end - platformInfo.start + 1
         const width = widthInBlocks * this.#blockSize
         const platform = new Platform(x, y, width, this.#blockSize, collisions)
-        // console.log(platform)
-        // console.log(
-        //   `x: ${x} y: ${y} start: ${platformInfo.start} end: ${platformInfo.end}`
-        // )
         platforms.push(platform)
       })
     }
     return platforms
   }
 }
-
-// const levelObj = new Level(level1, 8)
