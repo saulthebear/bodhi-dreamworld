@@ -30,6 +30,9 @@ function render() {
   // Draw the player
   renderer.drawObject(game.world.player)
 
+  // Draw platforms
+  game.world.platforms.forEach((platform) => renderer.drawObject(platform))
+
   // Output on screen
   renderer.render()
 }

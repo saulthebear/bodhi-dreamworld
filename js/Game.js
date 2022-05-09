@@ -1,3 +1,6 @@
+import { Platform } from "./Platform.js"
+import { Player } from "./Player.js"
+
 export class Game {
   constructor() {
     this.world = new GameWorld(250, 300)
@@ -21,6 +24,9 @@ class GameWorld {
     this.gravity = 3
     // Multiplier applied to velocity every tick
     this.friction = 0.75
+
+    this.platforms = []
+    this.#constructLevel()
   }
 
   get aspectRatio() {
@@ -68,48 +74,32 @@ class GameWorld {
     this.player.yVelocity *= this.friction
 
     this.collideWithWorldEdge(this.player)
-  }
-}
 
-class Player {
-  #isJumping = false
-
-  constructor(x, y) {
-    this.color = "white"
-
-    this.height = 16
-    this.width = 16
-
-    this.x = x
-    this.y = y
-
-    this.xVelocity = 0
-    this.yVelocity = 0
+    this.platforms.forEach((platform) => platform.applyColliders(this.player))
   }
 
-  update() {
-    this.x = Math.round(this.x + this.xVelocity)
-    this.y = Math.round(this.y + this.yVelocity)
+  #addPlatform(
+    x,
+    y,
+    width,
+    height,
+    collisionDirections = { top: true, right: true, bottom: true, left: true }
+  ) {
+    this.platforms.push(new Platform(x, y, width, height, collisionDirections))
   }
 
-  moveLeft() {
-    this.xVelocity -= 0.6
-  }
+  #constructLevel() {
+    // floor
+    this.#addPlatform(0, 180, 160, 8, { top: true })
 
-  moveRight() {
-    this.xVelocity += 0.6
-  }
+    this.#addPlatform(81, 168, 16, 16)
 
-  jump() {
-    // Disallow jumping in the air
-    if (!this.#isJumping) {
-      this.yVelocity -= 20
-      this.#isJumping = true
-    }
-  }
+    this.#addPlatform(120, 168, 40, 16, { left: true, top: true })
+    this.#addPlatform(136, 152, 24, 16, { left: true, top: true })
 
-  // Called when player hits the ground and can start jumping again
-  stopJump() {
-    this.#isJumping = false
+    this.#addPlatform(56, 136, 56, 8)
+    this.#addPlatform(0, 88, 32, 8)
+
+    this.#addPlatform(56, 120, 32, 16)
   }
 }
