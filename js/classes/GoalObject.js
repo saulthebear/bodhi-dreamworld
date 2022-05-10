@@ -6,7 +6,7 @@ export class GoalObject extends GameObject {
     // super(x, y, width, height, "red")
     super(x, y, width, height * 2, "red")
     this.image = new Image()
-    this.image.src = "./sprites/jar-2.png"
+    this.image.src = "../sprites/jar-2.png"
   }
 
   isColliding(object) {

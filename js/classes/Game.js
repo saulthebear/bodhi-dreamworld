@@ -28,7 +28,7 @@ class GameWorld {
     this.goals = level.goals
 
     this.bgImage = new Image()
-    this.bgImage.src = "./sprites/bg-sky-2.png"
+    this.bgImage.src = "../sprites/bg-sky-2.png"
 
     const playerSize = blockSize * 2
     this.player = new Player(

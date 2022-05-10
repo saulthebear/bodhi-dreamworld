@@ -1,7 +1,7 @@
-import { Renderer } from "./Renderer.js"
-import { Engine } from "./Engine.js"
-import { Game } from "./Game.js"
-import { Controller } from "./Controller.js"
+import { Renderer } from "./classes/Renderer.js"
+import { Engine } from "./classes/Engine.js"
+import { Game } from "./classes/Game.js"
+import { Controller } from "./classes/Controller.js"
 
 const engine = new Engine({ update, render, fps: 60 })
 let game = new Game()

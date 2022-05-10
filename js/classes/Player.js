@@ -72,7 +72,7 @@ export class Player extends GameObject {
     const runAnimationFactor = 5
 
     const idleRightImage = new Image()
-    idleRightImage.src = "./sprites/idle-right.png"
+    idleRightImage.src = "../sprites/idle-right.png"
     this.#idleRightSprite = new Sprite({
       image: idleRightImage,
       width: 52,
@@ -82,7 +82,7 @@ export class Player extends GameObject {
     })
 
     const idleLeftImage = new Image()
-    idleLeftImage.src = "./sprites/idle-left.png"
+    idleLeftImage.src = "../sprites/idle-left.png"
     this.#idleLeftSprite = new Sprite({
       image: idleLeftImage,
       width: 52,
@@ -92,7 +92,7 @@ export class Player extends GameObject {
     })
 
     const runRightImage = new Image()
-    runRightImage.src = "./sprites/run-right.png"
+    runRightImage.src = "../sprites/run-right.png"
     this.#runRightSprite = new Sprite({
       image: runRightImage,
       width: 136,
@@ -102,7 +102,7 @@ export class Player extends GameObject {
     })
 
     const runLeftImage = new Image()
-    runLeftImage.src = "./sprites/run-left.png"
+    runLeftImage.src = "../sprites/run-left.png"
     this.#runLeftSprite = new Sprite({
       image: runLeftImage,
       width: 136,

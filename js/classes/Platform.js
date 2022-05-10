@@ -8,7 +8,7 @@ export class Platform extends GameObject {
     this.collisionDirections = collisionDirections
 
     this.image = new Image()
-    this.image.src = "./sprites/platform-tile-long-grass-2.png"
+    this.image.src = "../sprites/platform-tile-long-grass-2.png"
   }
 
   get imageInfo() {
