@@ -49,7 +49,7 @@ function render() {
 
   // Draw the goal
   game.world.goals.forEach((goal) => {
-    renderer.drawObject(goal)
+    renderer.drawImage(goal.imageInfo)
   })
 
   // Draw the player
