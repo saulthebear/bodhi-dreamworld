@@ -38,4 +38,33 @@ export class GameObject {
   get left() {
     return this.x
   }
+
+  isWithinWidth(object) {
+    return object.right > this.left && object.left < this.right
+  }
+
+  isWithinHeight(object) {
+    return object.bottom > this.top && object.top < this.bottom
+  }
+
+  isCollidingTop(object) {
+    if (!this.isWithinWidth(object)) return false
+
+    return this.isWithinHeight(object)
+  }
+
+  isCollidingRight(object) {
+    if (!this.isWithinHeight(object)) return false
+
+    return this.isWithinWidth(object)
+  }
+
+  isCollidingBottom(object) {
+    if (!this.isWithinWidth(object)) return false
+    return this.isWithinHeight(object)
+  }
+  isCollidingLeft(object) {
+    if (!this.isWithinHeight(object)) return false
+    return this.isWithinWidth(object)
+  }
 }

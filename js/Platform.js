@@ -52,13 +52,9 @@ export class Platform extends GameObject {
   }
 
   collideTop(object) {
-    if (!this.isWithinWidth(object)) return false
-
-    const isIntersectingHeight =
-      object.bottom > this.top && object.top < this.bottom
     const wasAbove = object.prevY < this.top
 
-    if (isIntersectingHeight && wasAbove) {
+    if (this.isCollidingTop(object) && wasAbove) {
       object.yVelocity = 0
       object.bottom = this.top
       object.stopJump()
@@ -69,23 +65,20 @@ export class Platform extends GameObject {
   }
 
   collideRight(object) {
-    if (!this.isWithinHeight(object)) return false
-
     const wasRight = object.prevX >= this.right
 
-    if (this.isWithinWidth(object) && wasRight) {
+    if (this.isCollidingRight(object) && wasRight) {
       object.left = this.right
       object.xVelocity = 0
       return true
     }
     return false
   }
-  collideBottom(object) {
-    if (!this.isWithinWidth(object)) return false
 
+  collideBottom(object) {
     const wasBelow = object.prevY >= this.bottom
 
-    if (this.isWithinHeight(object) && wasBelow) {
+    if (this.isCollidingBottom(object) && wasBelow) {
       object.top = this.bottom
       object.yVelocity = 0
       return true
@@ -94,27 +87,13 @@ export class Platform extends GameObject {
   }
 
   collideLeft(object) {
-    if (!this.isWithinHeight(object)) return false
-
     const wasLeft = object.prevX <= this.left
 
-    if (this.isWithinWidth(object) && wasLeft) {
+    if (this.isCollidingLeft(object) && wasLeft) {
       object.right = this.left
       object.xVelocity = 0
       return true
     }
     return false
   }
-
-  isWithinWidth(object) {
-    return object.right > this.left && object.left < this.right
-  }
-
-  isWithinHeight(object) {
-    return object.bottom > this.top && object.top < this.bottom
-  }
-
-  // isIntersecting(object) {
-  //   return this.isWithinWidth(object) && this.isWithinHeight(object)
-  // }
 }
