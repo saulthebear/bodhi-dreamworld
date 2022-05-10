@@ -12,7 +12,7 @@ const renderer = new Renderer(
 )
 const controller = new Controller()
 
-function update() {
+function update(timeStep) {
   if (controller.leftActive) game.world.player.moveLeft()
   if (controller.rightActive) game.world.player.moveRight()
   if (controller.upActive) {
@@ -20,7 +20,8 @@ function update() {
     // Don't continually jump if key is held down
     controller.upActive = false
   }
-  game.update()
+  updateTimer()
+  game.update(timeStep)
 }
 
 function render() {
@@ -63,6 +64,18 @@ function handleResize() {
 
 function handleInputEvent({ type, key }) {
   controller.handleKeyPress(type, key)
+}
+
+function updateTimer() {
+  // console.log(game.timer)
+  const totalSeconds = game.timer
+  const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, "0")
+  const seconds = String(Math.round(totalSeconds - minutes * 60)).padStart(
+    2,
+    "0"
+  )
+  const timerString = `${minutes}:${seconds}`
+  document.querySelector("#time-display span").innerText = timerString
 }
 
 window.addEventListener("resize", handleResize)

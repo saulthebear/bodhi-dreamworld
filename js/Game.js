@@ -7,9 +7,11 @@ export class Game {
     const blockSize = 6
     const level1 = new Level(level1String, blockSize)
     this.world = new GameWorld(level1, blockSize)
+    this.timer = 0
   }
 
   update(timeStep) {
+    this.timer += timeStep
     this.world.update()
   }
 }
