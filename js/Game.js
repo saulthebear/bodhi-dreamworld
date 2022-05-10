@@ -21,6 +21,8 @@ class GameWorld {
     this.platforms = level.platforms
 
     this.backgroundColor = "rgba(0,0,0,1)"
+    this.bgImage = new Image()
+    this.bgImage.src = "./sprites/bg-sky-2.png"
 
     const playerSize = blockSize * 2
     this.player = new Player(

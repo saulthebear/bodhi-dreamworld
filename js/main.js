@@ -25,14 +25,27 @@ function update() {
 
 function render() {
   // Clear the screen
-  renderer.fill(game.world.backgroundColor)
+  // renderer.fill(game.world.backgroundColor)
+  renderer.drawImage({
+    image: game.world.bgImage,
+    sx: 0,
+    sy: 0,
+    sWidth: 144,
+    sHeight: 198,
+    dx: 0,
+    dy: 0,
+    dWidth: game.world.width,
+    dHeight: game.world.height,
+  })
+
+  // Draw platforms
+  game.world.platforms.forEach((platform) =>
+    renderer.drawImage(platform.imageInfo)
+  )
 
   // Draw the player
   // renderer.drawObject(game.world.player)
   renderer.drawImage(game.world.player.spriteFrame())
-
-  // Draw platforms
-  game.world.platforms.forEach((platform) => renderer.drawObject(platform))
 
   // Output on screen
   renderer.render()
