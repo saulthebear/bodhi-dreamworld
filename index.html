@@ -7,17 +7,51 @@
 
     <script src="js/main.js" type="module" defer></script>
     <link rel="stylesheet" href="css/styles.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <main>
-      <div class="top-row">
-        <p id="time-display">Time: <span>00:00</span></p>
-        <p id="level-display">Level <span>1</span></p>
-        <p id="treats-display">Treats collected: <span>0</span></p>
-      </div>
+      <div class="top-row"></div>
       <canvas></canvas>
-      <div class="bottom-row">
-        <button id="how-to-btn">How to play</button>
+      <div class="right">
+        <h1 class="title">Bodhi's Adventure</h1>
+        <div class="info-panel">
+          <div class="main-info">
+            <p id="level-display" class="info-display-center">
+              Level <span id="level-number">1</span>
+            </p>
+            <p id="time-display" class="info-display-between">
+              Time: <span id="time-number">00:00</span>
+            </p>
+            <p id="treats-display" class="info-display-between">
+              Treats collected: <span id="treats-number">0</span>
+            </p>
+            <div class="btns info-display-between">
+              <button id="help-btn">?</button>
+              <button id="restart-btn">Restart</button>
+            </div>
+          </div>
+          <div class="help hidden">
+            <p>Help Bodhi get to the jar of treats!</p>
+            <div class="controls">
+              <p class="info-display-between">
+                <span>Left:</span> <span>A or Left Arrow</span>
+              </p>
+              <p class="info-display-between">
+                <span>Right:</span> <span>D or Right Arrow</span>
+              </p>
+              <p class="info-display-between">
+                <span>Jump:</span> <span>W or Up Arrow</span>
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   </body>

@@ -82,13 +82,20 @@ function updateTimer() {
     "0"
   )
   const timerString = `${minutes}:${seconds}`
-  document.querySelector("#time-display span").innerText = timerString
+  document.querySelector("#time-number").innerText = timerString
 }
 
 function gameOver() {
   engine.stop()
   console.log("Game Over!")
 }
+
+// Show / hide help
+const helpBtn = document.querySelector("#help-btn")
+helpBtn.addEventListener("click", () => {
+  const helpSection = document.querySelector(".help")
+  helpSection.classList.toggle("hidden")
+})
 
 window.addEventListener("resize", handleResize)
 window.addEventListener("keydown", handleInputEvent)
