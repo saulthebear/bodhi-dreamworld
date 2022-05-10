@@ -5,9 +5,10 @@
 */
 
 export class Renderer {
-  // Offscreen canvas to prerender to.
+  // Offscreen canvas's context to prerender to.
   // https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Optimizing_canvas
   #buffer
+  // Onscreen canvas context
   #ctx
 
   constructor(canvas, worldWidth, worldHeight) {
@@ -18,6 +19,7 @@ export class Renderer {
     this.#buffer.canvas.height = worldHeight
   }
 
+  // Draw the buffer to the on screen canvas
   render() {
     this.#ctx.drawImage(
       this.#buffer.canvas,
@@ -63,6 +65,15 @@ export class Renderer {
       dWidth,
       dHeight
     )
+  }
+
+  write(text) {
+    this.#buffer.textAlign = "center"
+    this.#buffer.fillStyle = "white"
+    this.#buffer.font = "20px serif"
+    const centerX = this.#buffer.canvas.width / 2
+    const centerY = this.#buffer.canvas.height / 2
+    this.#buffer.fillText(text, centerX, centerY)
   }
 
   resizeCanvas(availableWidth, availableHeight, aspectRatio) {

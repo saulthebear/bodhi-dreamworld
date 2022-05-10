@@ -3,8 +3,8 @@ import { Engine } from "./Engine.js"
 import { Game } from "./Game.js"
 import { Controller } from "./Controller.js"
 
-const engine = new Engine({ update: update, render: render, fps: 60 })
-const game = new Game()
+const engine = new Engine({ update, render, fps: 60 })
+let game = new Game()
 const renderer = new Renderer(
   document.querySelector("canvas"),
   game.world.width,
@@ -14,7 +14,9 @@ const controller = new Controller()
 
 function update(timeStep) {
   if (game.gameOver) {
-    gameOver()
+    // Need to request an animation frame to ensure
+    // game over renders after all other drawings
+    requestAnimationFrame(gameOver)
     return
   }
   if (controller.leftActive) game.world.player.moveLeft()
@@ -86,8 +88,11 @@ function updateTimer() {
 }
 
 function gameOver() {
+  console.log("stopping the game")
   engine.stop()
-  console.log("Game Over!")
+  renderer.fill("rgba(114, 168, 204, 0.5)")
+  renderer.write("YOU WIN!")
+  renderer.render()
 }
 
 // Show / hide help
@@ -97,9 +102,18 @@ helpBtn.addEventListener("click", () => {
   helpSection.classList.toggle("hidden")
 })
 
+// Restart the game
+function restart() {
+  game = new Game()
+  handleResize()
+  engine.start()
+}
+const restartBtn = document.querySelector("#restart-btn")
+restartBtn.addEventListener("click", restart)
+
 window.addEventListener("resize", handleResize)
 window.addEventListener("keydown", handleInputEvent)
 window.addEventListener("keyup", handleInputEvent)
 
-handleResize()
-engine.start()
+// Start the game on page load
+restart()
