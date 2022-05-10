@@ -20,10 +20,15 @@ class GameWorld {
     this.height = level.height
     this.platforms = level.platforms
 
-    this.backgroundColor = "rgba(0,0,0,0.2)"
+    this.backgroundColor = "rgba(0,0,0,1)"
 
     const playerSize = blockSize * 2
-    this.player = new Player(level.player.x, level.player.y, playerSize)
+    this.player = new Player(
+      level.player.x,
+      level.player.y,
+      playerSize,
+      playerSize
+    )
 
     // Downward velocity added every tick
     this.gravity = 3

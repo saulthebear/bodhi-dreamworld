@@ -2,19 +2,41 @@ export class Sprite {
   #image
   #width
   #height
+  #rows
   #cols
+  #offsetX
+  #offsetY
+  #speedFactor
+
   #frameWidth
+  #frameHeight
+
   #currFrame
   #partialFrame
-  #speedFactor
-  constructor(image, width, height, cols, speedFactor) {
+
+  constructor({
+    image,
+    width,
+    height,
+    cols,
+    rows = 1,
+    speedFactor = 1,
+    offsetX = 0,
+    offsetY = 0,
+  }) {
     this.#image = image
 
     this.#width = width
     this.#height = height
     this.#cols = cols
+    this.#rows = rows
+    this.#offsetX = offsetX
+    this.#offsetY = offsetY
+
+    this.activeRow = 0
 
     this.#frameWidth = width / cols
+    this.#frameHeight = height / rows
 
     this.#currFrame = 0
     this.#partialFrame = 0
@@ -24,10 +46,10 @@ export class Sprite {
   frame() {
     const info = {
       image: this.#image,
-      sx: this.#frameWidth * this.#currFrame,
-      sy: 0,
+      sx: this.#frameWidth * this.#currFrame + this.#offsetX,
+      sy: this.#frameHeight * this.activeRow + this.#offsetY,
       sWidth: this.#frameWidth,
-      sHeight: this.#height,
+      sHeight: this.#frameHeight,
     }
     this.incrementFrame()
     return info

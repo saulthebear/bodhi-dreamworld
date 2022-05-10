@@ -3,36 +3,47 @@ import { Sprite } from "./Sprite.js"
 
 export class Player extends GameObject {
   #isJumping = false
-  #size
+  #width
+  #height
+  #idleRightSprite
+  #idleLeftSprite
+  #runRightSprite
+  #runLeftSprite
+  #currentSprite
+  #direction = "right"
 
-  constructor(x, y, size) {
+  constructor(x, y, width, height) {
     const color = "white"
     // Object.assign(this, new GameObject(x, y, size, size, color))
-    super(x, y, size, size, color)
+    super(x, y, width, height, color)
 
     this.xVelocity = 0
     this.yVelocity = 0
 
-    this.#size = size
-    const idleRightImage = new Image()
-    idleRightImage.src = "./sprites/idle-right.png"
-    this.idleRightSprite = new Sprite(idleRightImage, 52, 12, 4, 20)
+    this.#width = width
+    this.#height = height
+
+    this.#addSprites()
   }
 
   update() {
     // Previous position used for collision detection
     this.prevX = this.x
     this.prevY = this.y
+    if (Math.abs(this.xVelocity) < 0.1) this.#idle()
+
     this.x = Math.round(this.x + this.xVelocity)
     this.y = Math.round(this.y + this.yVelocity)
   }
 
   moveLeft() {
-    this.xVelocity -= 0.7
+    this.#run("left")
+    this.xVelocity -= 0.6
   }
 
   moveRight() {
-    this.xVelocity += 0.7
+    this.#run("right")
+    this.xVelocity += 0.6
   }
 
   jump() {
@@ -49,11 +60,72 @@ export class Player extends GameObject {
   }
 
   spriteFrame() {
-    const imageInfo = this.idleRightSprite.frame()
+    const imageInfo = this.#currentSprite.frame()
     imageInfo.dx = this.x
     imageInfo.dy = this.y
-    imageInfo.dWidth = this.#size + 1
-    imageInfo.dHeight = this.#size
+    imageInfo.dWidth = this.#width + 1
+    imageInfo.dHeight = this.#height
     return imageInfo
+  }
+
+  #addSprites() {
+    const idleAnimationFactor = 20
+    const idleRightImage = new Image()
+    idleRightImage.src = "./sprites/idle-right.png"
+    this.#idleRightSprite = new Sprite({
+      image: idleRightImage,
+      width: 52,
+      height: 12,
+      cols: 4,
+      speedFactor: idleAnimationFactor,
+    })
+
+    const idleLeftImage = new Image()
+    idleLeftImage.src = "./sprites/idle-left.png"
+    this.#idleLeftSprite = new Sprite({
+      image: idleLeftImage,
+      width: 52,
+      height: 12,
+      cols: 4,
+      speedFactor: idleAnimationFactor,
+    })
+
+    const runAnimationFactor = 10
+
+    const runRightImage = new Image()
+    runRightImage.src = "./sprites/run-right.png"
+    this.#runRightSprite = new Sprite({
+      image: runRightImage,
+      width: 136,
+      height: 12,
+      cols: 8,
+      speedFactor: runAnimationFactor,
+    })
+
+    const runLeftImage = new Image()
+    runLeftImage.src = "./sprites/run-left.png"
+    this.#runLeftSprite = new Sprite({
+      image: runLeftImage,
+      width: 136,
+      height: 12,
+      cols: 8,
+      speedFactor: runAnimationFactor,
+    })
+
+    this.#currentSprite = this.#idleRightSprite
+  }
+
+  #idle() {
+    this.#currentSprite =
+      this.#direction === "right" ? this.#idleRightSprite : this.#idleLeftSprite
+    this.#width = this.#height = 12
+  }
+
+  #run(direction) {
+    this.#direction = direction
+    this.#width = 16
+    this.#height = 12
+    this.#currentSprite =
+      this.#direction === "right" ? this.#runRightSprite : this.#runLeftSprite
   }
 }
