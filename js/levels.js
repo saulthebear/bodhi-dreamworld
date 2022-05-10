@@ -4,7 +4,7 @@ export const level1String = `
 *                        *
 *                        *
 *                        *
-*     =                  *
+*!!   =                  *
 *======  ===             *
 *                        *
 *                        *

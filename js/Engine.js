@@ -14,6 +14,8 @@ export class Engine {
   // Has the update function been called since last cycle
   #updated
 
+  #isRunning
+
   constructor({ update, render, fps }) {
     this.#update = update
     this.#render = render
@@ -23,10 +25,15 @@ export class Engine {
     this.#accumulatedTime = 0
     this.#lastFrameTime = window.performance.now()
     this.#updated = false
+    this.#isRunning = false
   }
 
   start() {
+    this.#isRunning = true
     requestAnimationFrame(this.#frame)
+  }
+  stop() {
+    this.#isRunning = false
   }
 
   // Capped at 1 second, in case user switches tabs for a long time
@@ -38,6 +45,8 @@ export class Engine {
 
   // One cycle of the game loop. Callback to requestAnimationFrame
   #frame = () => {
+    if (!this.#isRunning) return
+
     this.#mostRecentTime = window.performance.now()
     this.#accumulatedTime =
       this.#accumulatedTime +

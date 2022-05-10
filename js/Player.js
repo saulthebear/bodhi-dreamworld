@@ -14,7 +14,6 @@ export class Player extends GameObject {
 
   constructor(x, y, width, height) {
     const color = "white"
-    // Object.assign(this, new GameObject(x, y, size, size, color))
     super(x, y, width, height, color)
 
     this.xVelocity = 0
@@ -70,6 +69,8 @@ export class Player extends GameObject {
 
   #addSprites() {
     const idleAnimationFactor = 20
+    const runAnimationFactor = 5
+
     const idleRightImage = new Image()
     idleRightImage.src = "./sprites/idle-right.png"
     this.#idleRightSprite = new Sprite({
@@ -90,8 +91,6 @@ export class Player extends GameObject {
       speedFactor: idleAnimationFactor,
     })
 
-    const runAnimationFactor = 10
-
     const runRightImage = new Image()
     runRightImage.src = "./sprites/run-right.png"
     this.#runRightSprite = new Sprite({
@@ -111,8 +110,6 @@ export class Player extends GameObject {
       cols: 8,
       speedFactor: runAnimationFactor,
     })
-
-    this.#currentSprite = this.#idleRightSprite
   }
 
   #idle() {

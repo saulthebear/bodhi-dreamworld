@@ -13,6 +13,10 @@ const renderer = new Renderer(
 const controller = new Controller()
 
 function update(timeStep) {
+  if (game.gameOver) {
+    gameOver()
+    return
+  }
   if (controller.leftActive) game.world.player.moveLeft()
   if (controller.rightActive) game.world.player.moveRight()
   if (controller.upActive) {
@@ -26,7 +30,6 @@ function update(timeStep) {
 
 function render() {
   // Clear the screen
-  // renderer.fill(game.world.backgroundColor)
   renderer.drawImage({
     image: game.world.bgImage,
     sx: 0,
@@ -44,8 +47,12 @@ function render() {
     renderer.drawImage(platform.imageInfo)
   )
 
+  // Draw the goal
+  game.world.goals.forEach((goal) => {
+    renderer.drawObject(goal)
+  })
+
   // Draw the player
-  // renderer.drawObject(game.world.player)
   renderer.drawImage(game.world.player.spriteFrame())
 
   // Output on screen
@@ -76,6 +83,11 @@ function updateTimer() {
   )
   const timerString = `${minutes}:${seconds}`
   document.querySelector("#time-display span").innerText = timerString
+}
+
+function gameOver() {
+  engine.stop()
+  console.log("Game Over!")
 }
 
 window.addEventListener("resize", handleResize)

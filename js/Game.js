@@ -1,6 +1,7 @@
 import { Platform } from "./Platform.js"
 import { Player } from "./Player.js"
 import { level1String } from "./levels.js"
+import { GoalObject } from "./GoalObject.js"
 
 export class Game {
   constructor() {
@@ -13,16 +14,19 @@ export class Game {
   update(timeStep) {
     this.timer += timeStep
     this.world.update()
+    this.gameOver = this.world.gameOver
   }
 }
 
 class GameWorld {
   constructor(level, blockSize) {
+    this.gameOver = false
+
     this.width = level.width
     this.height = level.height
     this.platforms = level.platforms
+    this.goals = level.goals
 
-    this.backgroundColor = "rgba(0,0,0,1)"
     this.bgImage = new Image()
     this.bgImage.src = "./sprites/bg-sky-2.png"
 
@@ -87,6 +91,14 @@ class GameWorld {
     this.collideWithWorldEdge(this.player)
 
     this.platforms.forEach((platform) => platform.applyColliders(this.player))
+    this.#checkWin()
+  }
+
+  #checkWin() {
+    const didWin = this.goals.some((goal) => goal.isColliding(this.player))
+    if (didWin) {
+      this.gameOver = true
+    }
   }
 }
 
@@ -112,6 +124,14 @@ class Level {
 
     const playerInfo = levelInfoObjects.filter((o) => o.type === "player")[0]
     this.#player = { x: playerInfo.x, y: playerInfo.y }
+
+    this.goals = []
+    const goalInfos = levelInfoObjects.filter((o) => o.type === "goal")
+    goalInfos.forEach((goalInfo) =>
+      this.goals.push(
+        new GoalObject(goalInfo.x, goalInfo.y, goalInfo.width, goalInfo.height)
+      )
+    )
   }
 
   get player() {
@@ -141,6 +161,7 @@ class Level {
 
     objectTypeMap["="] = "platform"
     objectTypeMap["p"] = "player"
+    objectTypeMap["!"] = "goal"
 
     const symbols = Object.keys(objectTypeMap)
 
