@@ -219,6 +219,10 @@ function helpToggle() {
 
 // Start / Restart the game - callback for restart button click
 function restart() {
+  // Hide level complete message
+  const levelCompleteMessage = document.querySelector("#level-complete")
+  levelCompleteMessage.classList.add("hidden")
+
   // Instantiate the game with current level
   game = new Game({ level: currentLevel })
 
