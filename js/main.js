@@ -8,6 +8,8 @@ import { Controller } from "./classes/Controller.js"
  *****************/
 
 let currentLevel = 1
+// Number of levels that exist
+let availableLevels = 2
 
 /*
   The engine is responsible for calling the update and render methods
@@ -41,6 +43,8 @@ const controller = new Controller()
 
 const restartBtn = document.querySelector("#restart-btn")
 const helpBtn = document.querySelector("#help-btn")
+const prevLevelBtn = document.querySelector("#prev-level")
+const nextLevelBtn = document.querySelector("#next-level")
 
 /******************************************************************************/
 
@@ -159,6 +163,35 @@ function updateTreats() {
   document.querySelector("#treats-collected").innerText = collected
 }
 
+// Sets the current level and starts the game at that level
+function setLevel(levelNumber) {
+  currentLevel = levelNumber
+  const levelIndicator = document.querySelector("#level-number")
+  levelIndicator.innerText = levelNumber
+
+  setupLevelButtons()
+  restart()
+}
+
+// Next level - callback for next level button
+function incrementLevel() {
+  if (currentLevel < availableLevels) setLevel(currentLevel + 1)
+}
+
+// Prev level - callback for prev level button
+function decrementLevel() {
+  if (currentLevel > 1) setLevel(currentLevel - 1)
+}
+
+/*
+  Sets the disabled property of level select buttons
+  based on the current level and number of available levels
+*/
+function setupLevelButtons() {
+  prevLevelBtn.disabled = currentLevel === 1
+  nextLevelBtn.disabled = currentLevel === availableLevels
+}
+
 /*
   Called once the level has been completed.
   Responsible for stopping the game engine (which stops rendering and stops the
@@ -204,6 +237,8 @@ function restart() {
  *   LISTENERS    *
  *****************/
 
+prevLevelBtn.addEventListener("click", decrementLevel)
+nextLevelBtn.addEventListener("click", incrementLevel)
 restartBtn.addEventListener("click", restart)
 helpBtn.addEventListener("click", helpToggle)
 
@@ -218,6 +253,6 @@ window.addEventListener("keyup", handleInputEvent)
  *   EXECUTION    *
  *****************/
 
-restart()
+setLevel(1)
 
 /******************************************************************************/

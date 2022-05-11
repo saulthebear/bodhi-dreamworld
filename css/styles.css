@@ -95,6 +95,24 @@ canvas {
   margin-right: 0;
 }
 
+.level-display {
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: 2rem;
+}
+
+.level-display button {
+  border-radius: 200rem;
+  padding: 0.5rem 1rem;
+}
+
+.level-display button:disabled {
+  cursor: default;
+  background-color: #42525c;
+  color: #a0b2bd;
+}
+
 .info-display-center {
   text-align: center;
 }
@@ -102,10 +120,6 @@ canvas {
 .info-display-between {
   display: flex;
   justify-content: space-between;
-}
-
-#level-display {
-  margin-bottom: 2rem;
 }
 
 .btns {
