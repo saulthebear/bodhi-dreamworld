@@ -1,14 +1,22 @@
 import { Level } from "./Level.js"
 import { Player } from "./Player.js"
-import { level1String } from "../levels/level1.js"
 import { Treat } from "./Treat.js"
 import { BrushProjectile } from "./Projectile.js"
 
+// Level Maps
+import { level1String } from "../levels/level1.js"
+import { level2String } from "../levels/level2.js"
+
 export class Game {
-  constructor() {
+  constructor({ level }) {
     const blockSize = 6
-    const level1 = new Level(level1String, blockSize)
-    this.world = new GameWorld(level1, blockSize)
+
+    const levels = Object.create(null)
+    levels[1] = level1String
+    levels[2] = level2String
+    const currLevel = new Level(levels[level], blockSize)
+
+    this.world = new GameWorld(currLevel, blockSize)
     this.timer = 0
   }
 

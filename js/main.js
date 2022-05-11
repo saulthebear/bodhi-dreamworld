@@ -3,15 +3,59 @@ import { Engine } from "./classes/Engine.js"
 import { Game } from "./classes/Game.js"
 import { Controller } from "./classes/Controller.js"
 
+/*****************
+ *   GLOBALS     *
+ *****************/
+
+let currentLevel = 1
+
+/*
+  The engine is responsible for calling the update and render methods
+  at fixed time intervals, determined by the fps property
+*/
 const engine = new Engine({ update, render, fps: 60 })
-let game = new Game()
-const renderer = new Renderer(
-  document.querySelector("canvas"),
-  game.world.width,
-  game.world.height
-)
+
+/*
+  The game holds the world which contains all the level's objects
+  The game also calls the world's update method, which in turn calls all the
+  world objects' update methods.
+  Instantiated in the `restart` function
+*/
+let game
+
+/*
+  The renderer is responsible for drawing to the canvas.
+  It contains utility functions to draw shapes or images to the canvas
+  These functions actually draw to a buffer canvas, and this buffer is only
+  drawn to the on-screen canvas when the renderer's `render` method is called
+  Instantiated in the `restart` function
+*/
+let renderer
+
+/*
+  The controller is responsible for handling user input.
+  It sets properties like 'upActive' which can then be used to
+  call game functions here in main.js
+*/
 const controller = new Controller()
 
+const restartBtn = document.querySelector("#restart-btn")
+const helpBtn = document.querySelector("#help-btn")
+
+/******************************************************************************/
+
+/*****************
+ *    Callbacks   *
+ *****************/
+
+/*
+  This is the highest level update function and is the one called by the
+  engine every frame. This function is responsible for calling game functions
+  based on user input, and then calling the game's main update function.
+  Here non-game related update functions are also called, such as updating
+  the DOM to reflect the time passed, how many treats have been collected,
+  and informing the user when the level has been completed.
+*/
 function update(timeStep) {
   if (game.gameOver) {
     // Need to request an animation frame to ensure
@@ -31,6 +75,11 @@ function update(timeStep) {
   game.update(timeStep)
 }
 
+/*
+  This is the render function called by the engine on every frame.
+  It is responsible for clearing the screen and drawing all the game objects by
+  calling relevant methods in the Renderer
+*/
 function render() {
   // Clear the screen
   renderer.drawImage({
@@ -55,7 +104,7 @@ function render() {
     renderer.drawImage(treat.imageInfo)
   })
 
-  // Draw the goal
+  // Draw the level end goal
   game.world.goals.forEach((goal) => {
     renderer.drawImage(goal.imageInfo)
   })
@@ -70,24 +119,27 @@ function render() {
   renderer.render()
 }
 
+/*
+  This function is called on page load and then on every window resize event.
+  It is responsible for resizing the canvas, so that if fits in the window
+*/
 function handleResize() {
   const marginInline = getComputedStyle(document.documentElement)
     .getPropertyValue("--margin-inline")
     .split("px")[0]
   const width = document.documentElement.clientWidth - marginInline
   const height = document.documentElement.clientHeight - marginInline
-  // const width = document.documentElement.clientWidth
-  // const height = document.documentElement.clientHeight
   renderer.resizeCanvas(width, height, game.world.aspectRatio)
   renderer.render()
 }
 
+/* Passes user input events on to the controller object */
 function handleInputEvent({ type, key }) {
   controller.handleKeyPress(type, key)
 }
 
+/* Updates DOM timer */
 function updateTimer() {
-  // console.log(game.timer)
   const totalSeconds = game.timer
   const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, "0")
   const seconds = String(Math.round(totalSeconds - minutes * 60)).padStart(
@@ -98,6 +150,7 @@ function updateTimer() {
   document.querySelector("#time-number").innerText = timerString
 }
 
+/* Updates treats collected display in the DOM */
 function updateTreats() {
   const total = game.world.totalTreats
   const remaining = game.world.treats.length
@@ -106,8 +159,13 @@ function updateTreats() {
   document.querySelector("#treats-collected").innerText = collected
 }
 
+/*
+  Called once the level has been completed.
+  Responsible for stopping the game engine (which stops rendering and stops the
+  game timer) and showing the user a message in the DOM informing them that the
+  level has been completed.
+*/
 function gameOver() {
-  console.log("stopping the game")
   engine.stop()
 
   // Show level complete message
@@ -115,25 +173,51 @@ function gameOver() {
   levelCompleteMessage.classList.remove("hidden")
 }
 
-// Show / hide help
-const helpBtn = document.querySelector("#help-btn")
-helpBtn.addEventListener("click", () => {
+// Show / hide help - callback for help button click
+function helpToggle() {
   const helpSection = document.querySelector(".help")
   helpSection.classList.toggle("hidden")
-})
+}
 
-// Restart the game
+// Start / Restart the game - callback for restart button click
 function restart() {
-  game = new Game()
+  // Instantiate the game with current level
+  game = new Game({ level: currentLevel })
+
+  // Instantiate renderer with current level's size
+  renderer = new Renderer(
+    document.querySelector("canvas"),
+    game.world.width,
+    game.world.height
+  )
+
+  // Resize the canvas to have correct aspect ratio and fit in the window
   handleResize()
+
   engine.start()
 }
-const restartBtn = document.querySelector("#restart-btn")
+
+/******************************************************************************/
+
+/*****************
+ *     EVENT      *
+ *   LISTENERS    *
+ *****************/
+
 restartBtn.addEventListener("click", restart)
+helpBtn.addEventListener("click", helpToggle)
 
 window.addEventListener("resize", handleResize)
 window.addEventListener("keydown", handleInputEvent)
 window.addEventListener("keyup", handleInputEvent)
 
-// Start the game on page load
+/******************************************************************************/
+
+/*****************
+ *     START      *
+ *   EXECUTION    *
+ *****************/
+
 restart()
+
+/******************************************************************************/
