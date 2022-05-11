@@ -67,15 +67,6 @@ export class Renderer {
     )
   }
 
-  write(text) {
-    this.#buffer.textAlign = "center"
-    this.#buffer.fillStyle = "white"
-    this.#buffer.font = "20px serif"
-    const centerX = this.#buffer.canvas.width / 2
-    const centerY = this.#buffer.canvas.height / 2
-    this.#buffer.fillText(text, centerX, centerY)
-  }
-
   resizeCanvas(availableWidth, availableHeight, aspectRatio) {
     let newWidth = availableWidth
     let newHeight = availableHeight

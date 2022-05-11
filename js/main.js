@@ -109,9 +109,10 @@ function updateTreats() {
 function gameOver() {
   console.log("stopping the game")
   engine.stop()
-  renderer.fill("rgba(114, 168, 204, 0.5)")
-  renderer.write("YOU WIN!")
-  renderer.render()
+
+  // Show level complete message
+  const levelCompleteMessage = document.querySelector("#level-complete")
+  levelCompleteMessage.classList.remove("hidden")
 }
 
 // Show / hide help
