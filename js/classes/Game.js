@@ -116,9 +116,8 @@ class GameWorld {
 
     this.treats.forEach((treat) => treat.collide(this.player))
 
-    this.brushSpawns.forEach((spawn) => {
-      this.#spawnBrush(spawn, timeStep)
-    })
+    this.#spawnBrushes(this.brushSpawns, timeStep)
+
     this.brushes.forEach((brush) => {
       brush.collide(this.player)
       brush.update()
@@ -138,11 +137,13 @@ class GameWorld {
     this.treats = this.treats.filter((treat) => treat !== collectedTreat)
   }
 
-  #spawnBrush({ spawnX, spawnY, direction }, timeStep) {
+  #spawnBrushes(spawns, timeStep) {
     this.#brushTimeElapsed += timeStep
     if (this.#brushTimeElapsed > this.#brushTriggerTime) {
+      spawns.forEach(({ spawnX, spawnY, direction }) =>
+        this.brushes.push(new BrushProjectile({ spawnX, spawnY, direction }))
+      )
       this.#brushTimeElapsed -= this.#brushTriggerTime
-      this.brushes.push(new BrushProjectile({ spawnX, spawnY, direction }))
     }
   }
 }
