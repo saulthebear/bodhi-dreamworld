@@ -60,6 +60,9 @@ function render() {
     renderer.drawImage(goal.imageInfo)
   })
 
+  // Draw projectile brushes
+  game.world.brushes.forEach((brush) => renderer.drawImage(brush.imageInfo))
+
   // Draw the player
   renderer.drawImage(game.world.player.spriteFrame())
 
@@ -73,6 +76,8 @@ function handleResize() {
     .split("px")[0]
   const width = document.documentElement.clientWidth - marginInline
   const height = document.documentElement.clientHeight - marginInline
+  // const width = document.documentElement.clientWidth
+  // const height = document.documentElement.clientHeight
   renderer.resizeCanvas(width, height, game.world.aspectRatio)
   renderer.render()
 }

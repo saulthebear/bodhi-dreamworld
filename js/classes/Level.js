@@ -4,9 +4,13 @@ import { Treat } from "./Treat.js"
 
 export class Level {
   #levelInfoObjects
+
   #platforms
   #player
+  #goals
   #treats
+  #brushSpawns
+
   #widthInBlocks
   #heightInBlocks
   #blockSize
@@ -24,10 +28,10 @@ export class Level {
     const playerInfo = this.#infoObjects("player")[0]
     this.#player = { x: playerInfo.x, y: playerInfo.y }
 
-    this.goals = []
+    this.#goals = []
     const goalInfos = this.#infoObjects("goal")
     goalInfos.forEach((goalInfo) =>
-      this.goals.push(
+      this.#goals.push(
         new GoalObject(goalInfo.x, goalInfo.y, goalInfo.width, goalInfo.height)
       )
     )
@@ -37,6 +41,11 @@ export class Level {
       (treatInfo) =>
         new Treat(treatInfo.x, treatInfo.y, treatInfo.width, treatInfo.height)
     )
+
+    const brushSpawnInfos = this.#infoObjects("brush-spawn-right")
+    this.#brushSpawns = brushSpawnInfos.map((info) => {
+      return { spawnX: info.x, spawnY: info.y, direction: "RIGHT" }
+    })
   }
 
   get player() {
@@ -47,8 +56,16 @@ export class Level {
     return this.#platforms
   }
 
+  get goals() {
+    return this.#goals
+  }
+
   get treats() {
     return this.#treats
+  }
+
+  get brushSpawns() {
+    return this.#brushSpawns
   }
 
   get width() {
@@ -72,6 +89,7 @@ export class Level {
     objectTypeMap["p"] = "player"
     objectTypeMap["!"] = "goal"
     objectTypeMap["$"] = "treat"
+    objectTypeMap[">"] = "brush-spawn-right"
 
     const symbols = Object.keys(objectTypeMap)
 

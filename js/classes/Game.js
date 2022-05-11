@@ -2,6 +2,7 @@ import { Level } from "./Level.js"
 import { Player } from "./Player.js"
 import { level1String } from "../levels/level1.js"
 import { Treat } from "./Treat.js"
+import { BrushProjectile } from "./Projectile.js"
 
 export class Game {
   constructor() {
@@ -13,22 +14,30 @@ export class Game {
 
   update(timeStep) {
     this.timer += timeStep
-    this.world.update()
+    this.world.update(timeStep)
     this.gameOver = this.world.gameOver
   }
 }
 
 class GameWorld {
+  #brushTriggerTime = 3
+  #brushTimeElapsed = 3
+
   constructor(level, blockSize) {
     this.gameOver = false
 
     this.width = level.width
     this.height = level.height
+
     this.platforms = level.platforms
     this.goals = level.goals
     this.treats = level.treats
     this.totalTreats = this.treats.length
 
+    this.brushes = []
+    this.brushSpawns = level.brushSpawns
+
+    // Background Image
     this.bgImage = new Image()
     this.bgImage.src = "../sprites/bg-sky-2.png"
 
@@ -40,12 +49,13 @@ class GameWorld {
       playerSize
     )
 
+    // Called whenever the player collides with a treat
     Treat.collectionCallback = this.#collectTreat.bind(this)
 
     // Downward velocity added every tick
     this.gravity = 3
     // Multiplier applied to velocity every tick
-    this.friction = 0.75
+    this.friction = 0.7
   }
 
   get aspectRatio() {
@@ -84,7 +94,7 @@ class GameWorld {
     }
   }
 
-  update() {
+  update(timeStep) {
     this.player.yVelocity += this.gravity
 
     this.player.update()
@@ -98,6 +108,14 @@ class GameWorld {
 
     this.treats.forEach((treat) => treat.collide(this.player))
 
+    this.brushSpawns.forEach((spawn) => {
+      this.#spawnBrush(spawn, timeStep)
+    })
+    this.brushes.forEach((brush) => {
+      brush.collide(this.player)
+      brush.update()
+    })
+
     this.#checkWin()
   }
 
@@ -110,5 +128,13 @@ class GameWorld {
 
   #collectTreat(collectedTreat) {
     this.treats = this.treats.filter((treat) => treat !== collectedTreat)
+  }
+
+  #spawnBrush({ spawnX, spawnY, direction }, timeStep) {
+    this.#brushTimeElapsed += timeStep
+    if (this.#brushTimeElapsed > this.#brushTriggerTime) {
+      this.#brushTimeElapsed -= this.#brushTriggerTime
+      this.brushes.push(new BrushProjectile({ spawnX, spawnY, direction }))
+    }
   }
 }
