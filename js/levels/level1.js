@@ -1,4 +1,4 @@
-export const level1String = `
+export const level1Map = `
 **************************
 *                        *
 *                        *

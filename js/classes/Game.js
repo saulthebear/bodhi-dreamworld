@@ -4,16 +4,16 @@ import { Treat } from "./Treat.js"
 import { BrushProjectile } from "./Projectile.js"
 
 // Level Maps
-import { level1String } from "../levels/level1.js"
-import { level2String } from "../levels/level2.js"
+import { level1Map } from "../levels/level1.js"
+import { level2Map } from "../levels/level2.js"
 
 export class Game {
   constructor({ level }) {
     const blockSize = 6
 
     const levels = Object.create(null)
-    levels[1] = level1String
-    levels[2] = level2String
+    levels[1] = level1Map
+    levels[2] = level2Map
     const currLevel = new Level(levels[level], blockSize)
 
     this.world = new GameWorld(currLevel, blockSize)

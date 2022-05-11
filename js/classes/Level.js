@@ -15,13 +15,13 @@ export class Level {
   #heightInBlocks
   #blockSize
 
-  constructor(levelString, blockSize) {
-    const rowStrings = this.#splitString(levelString)
+  constructor(levelMap, blockSize) {
+    const rowStrings = this.#splitString(levelMap)
     this.#widthInBlocks = rowStrings[0].length - 2
     this.#heightInBlocks = rowStrings.length - 2
     this.#blockSize = blockSize
 
-    this.#levelInfoObjects = this.#parseLevelString(rowStrings)
+    this.#levelInfoObjects = this.#parseLevelMap(rowStrings)
 
     this.#platforms = this.#createPlatforms(this.#infoObjects("platform"))
 
@@ -81,7 +81,7 @@ export class Level {
     return levelString.split("\n").filter((row) => row.length > 0)
   }
 
-  #parseLevelString(rowStrings) {
+  #parseLevelMap(rowStrings) {
     const rowsOfObjects = []
     const objectTypeMap = Object.create(null)
 
@@ -124,6 +124,9 @@ export class Level {
     return detailedObjects.flat()
   }
 
+  // Simple objects only contain the block indices of their values
+  // This function translates those values into real pixel values based on the
+  // block size
   #addDetail(rowsOfObjects) {
     return rowsOfObjects.map((row, rowIndex) => {
       if (row.length === 0) return row
