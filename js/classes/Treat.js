@@ -12,7 +12,7 @@ export class Treat extends GameObject {
   constructor(x, y, width, height) {
     super(x, y, width, height, "lightgreen")
     this.image = new Image()
-    this.image.src = "../sprites/fish.png"
+    this.image.src = "./sprites/fish.png"
 
     // Initialize values for bobbing up and down
     this.#minY = y - 3

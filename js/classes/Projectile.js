@@ -16,7 +16,7 @@ export class BrushProjectile extends GameObject {
     }
 
     this.image = new Image()
-    this.image.src = "../sprites/brush-2.png"
+    this.image.src = "./sprites/brush-2.png"
   }
 
   update() {
