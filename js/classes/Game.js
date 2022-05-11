@@ -114,7 +114,10 @@ class GameWorld {
 
     this.platforms.forEach((platform) => platform.applyColliders(this.player))
 
-    this.treats.forEach((treat) => treat.collide(this.player))
+    this.treats.forEach((treat) => {
+      treat.collide(this.player)
+      treat.update()
+    })
 
     this.#spawnBrushes(this.brushSpawns, timeStep)
 

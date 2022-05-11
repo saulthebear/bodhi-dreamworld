@@ -3,17 +3,24 @@ import { GameObject } from "./GameObject.js"
 export class Treat extends GameObject {
   static collectionCallback = () => {}
 
-  #wasCollected = 0
+  #minY // Highest it can bob to
+  #maxY // Lowest it can bob to
+  #fractionalY // Used to update bob position -- Rounded to a whole number
+  #bobDirection = "UP"
+  #bobSpeed = 0.05 + Math.random() * 0.01 // Random so they aren't in sync
 
   constructor(x, y, width, height) {
     super(x, y, width, height, "lightgreen")
     this.image = new Image()
     this.image.src = "../sprites/fish.png"
+
+    // Initialize values for bobbing up and down
+    this.#minY = y - 3
+    this.#maxY = y
+    this.#fractionalY = y
   }
 
   collide(object) {
-    if (this.#wasCollected) return
-
     if (
       this.isCollidingTop(object) ||
       this.isCollidingRight(object) ||
@@ -36,5 +43,22 @@ export class Treat extends GameObject {
       dWidth: this.width,
       dHeight: this.height,
     }
+  }
+
+  // Update y position so the treat bobs up and down
+  update() {
+    if (this.#fractionalY <= this.#minY && this.#bobDirection === "UP") {
+      this.#bobDirection = "DOWN"
+    } else if (
+      this.#fractionalY >= this.#maxY &&
+      this.#bobDirection === "DOWN"
+    ) {
+      this.#bobDirection = "UP"
+    }
+
+    if (this.#bobDirection === "UP") this.#fractionalY -= this.#bobSpeed
+    else this.#fractionalY += this.#bobSpeed
+
+    this.y = Math.round(this.#fractionalY)
   }
 }
