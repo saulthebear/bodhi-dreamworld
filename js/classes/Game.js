@@ -140,9 +140,17 @@ class GameWorld {
   #spawnBrushes(spawns, timeStep) {
     this.#brushTimeElapsed += timeStep
     if (this.#brushTimeElapsed > this.#brushTriggerTime) {
-      spawns.forEach(({ spawnX, spawnY, direction }) =>
-        this.brushes.push(new BrushProjectile({ spawnX, spawnY, direction }))
-      )
+      spawns.forEach(({ spawnX, spawnY, direction }) => {
+        // Delay up to 1 second
+        const randomDelay = Math.random() * 1000
+        setTimeout(
+          () =>
+            this.brushes.push(
+              new BrushProjectile({ spawnX, spawnY, direction })
+            ),
+          randomDelay
+        )
+      })
       this.#brushTimeElapsed -= this.#brushTriggerTime
     }
   }
