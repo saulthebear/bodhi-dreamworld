@@ -1,7 +1,7 @@
-import { Platform } from "./Platform.js"
+import { Level } from "./Level.js"
 import { Player } from "./Player.js"
-import { level1String } from "./levels.js"
-import { GoalObject } from "./GoalObject.js"
+import { level1String } from "../levels/level1.js"
+import { Treat } from "./Treat.js"
 
 export class Game {
   constructor() {
@@ -26,6 +26,8 @@ class GameWorld {
     this.height = level.height
     this.platforms = level.platforms
     this.goals = level.goals
+    this.treats = level.treats
+    this.totalTreats = this.treats.length
 
     this.bgImage = new Image()
     this.bgImage.src = "../sprites/bg-sky-2.png"
@@ -37,6 +39,8 @@ class GameWorld {
       playerSize,
       playerSize
     )
+
+    Treat.collectionCallback = this.#collectTreat.bind(this)
 
     // Downward velocity added every tick
     this.gravity = 3
@@ -91,6 +95,9 @@ class GameWorld {
     this.collideWithWorldEdge(this.player)
 
     this.platforms.forEach((platform) => platform.applyColliders(this.player))
+
+    this.treats.forEach((treat) => treat.collide(this.player))
+
     this.#checkWin()
   }
 
@@ -100,128 +107,8 @@ class GameWorld {
       this.gameOver = true
     }
   }
-}
 
-class Level {
-  #platforms
-  #player
-  #widthInBlocks
-  #heightInBlocks
-  #blockSize
-
-  constructor(levelString, blockSize) {
-    const rowStrings = this.#splitString(levelString)
-    this.#widthInBlocks = rowStrings[0].length - 2
-    this.#heightInBlocks = rowStrings.length - 2
-    this.#blockSize = blockSize
-
-    const levelInfoObjects = this.#parseLevelString(rowStrings)
-
-    const platformInfoObjects = levelInfoObjects.filter(
-      (o) => o.type === "platform"
-    )
-    this.#platforms = this.#createPlatforms(platformInfoObjects)
-
-    const playerInfo = levelInfoObjects.filter((o) => o.type === "player")[0]
-    this.#player = { x: playerInfo.x, y: playerInfo.y }
-
-    this.goals = []
-    const goalInfos = levelInfoObjects.filter((o) => o.type === "goal")
-    goalInfos.forEach((goalInfo) =>
-      this.goals.push(
-        new GoalObject(goalInfo.x, goalInfo.y, goalInfo.width, goalInfo.height)
-      )
-    )
-  }
-
-  get player() {
-    return this.#player
-  }
-
-  get platforms() {
-    return this.#platforms
-  }
-
-  get width() {
-    return this.#blockSize * this.#widthInBlocks
-  }
-
-  get height() {
-    return this.#blockSize * this.#heightInBlocks
-  }
-
-  // Splits the string into rows and trims empty rows
-  #splitString(levelString) {
-    return levelString.split("\n").filter((row) => row.length > 0)
-  }
-
-  #parseLevelString(rowStrings) {
-    const rowsOfObjects = []
-    const objectTypeMap = Object.create(null)
-
-    objectTypeMap["="] = "platform"
-    objectTypeMap["p"] = "player"
-    objectTypeMap["!"] = "goal"
-
-    const symbols = Object.keys(objectTypeMap)
-
-    for (let i = 1; i < rowStrings.length - 1; i++) {
-      const rowString = rowStrings[i]
-
-      // Holds all the start and end indices of objects on this row
-      let rowObjects = []
-
-      let currentSymbol = null
-
-      for (let j = 1; j < rowString.length; j++) {
-        const block = rowString[j]
-        const colIndex = j - 1
-
-        // Object start
-        if (!currentSymbol && symbols.includes(block)) {
-          currentSymbol = block
-          rowObjects.push({ type: objectTypeMap[block], start: colIndex })
-        }
-
-        // Object end
-        if (currentSymbol && block !== currentSymbol) {
-          const lastObject = rowObjects[rowObjects.length - 1]
-          lastObject.end = colIndex - 1
-          currentSymbol = null
-        }
-      }
-      rowsOfObjects.push(rowObjects)
-    }
-    const detailedObjects = this.#addDetail(rowsOfObjects)
-    return detailedObjects.flat()
-  }
-
-  #addDetail(rowsOfObjects) {
-    return rowsOfObjects.map((row, rowIndex) => {
-      if (row.length === 0) return row
-
-      const y = rowIndex * this.#blockSize
-      return row.map((simpleObject) => {
-        const x = simpleObject.start * this.#blockSize
-        const widthInBlocks = simpleObject.end - simpleObject.start + 1
-        const width = widthInBlocks * this.#blockSize
-
-        return {
-          type: simpleObject.type,
-          x,
-          y,
-          width,
-          height: this.#blockSize,
-        }
-      })
-    })
-  }
-
-  #createPlatforms(platformInfoObjects) {
-    const collisions = { top: true, right: true, bottom: true, left: true }
-    return platformInfoObjects.map(
-      (info) =>
-        new Platform(info.x, info.y, info.width, info.height, collisions)
-    )
+  #collectTreat(collectedTreat) {
+    this.treats = this.treats.filter((treat) => treat !== collectedTreat)
   }
 }

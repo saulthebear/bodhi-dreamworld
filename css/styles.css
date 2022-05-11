@@ -103,6 +103,6 @@ canvas {
 
 @media (max-width: 1000px) {
   main {
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
 }

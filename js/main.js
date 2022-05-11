@@ -27,6 +27,7 @@ function update(timeStep) {
     controller.upActive = false
   }
   updateTimer()
+  updateTreats()
   game.update(timeStep)
 }
 
@@ -48,6 +49,11 @@ function render() {
   game.world.platforms.forEach((platform) =>
     renderer.drawImage(platform.imageInfo)
   )
+
+  // Draw treats
+  game.world.treats.forEach((treat) => {
+    renderer.drawImage(treat.imageInfo)
+  })
 
   // Draw the goal
   game.world.goals.forEach((goal) => {
@@ -85,6 +91,14 @@ function updateTimer() {
   )
   const timerString = `${minutes}:${seconds}`
   document.querySelector("#time-number").innerText = timerString
+}
+
+function updateTreats() {
+  const total = game.world.totalTreats
+  const remaining = game.world.treats.length
+  const collected = total - remaining
+  document.querySelector("#treats-total").innerText = total
+  document.querySelector("#treats-collected").innerText = collected
 }
 
 function gameOver() {

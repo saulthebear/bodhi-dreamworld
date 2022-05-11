@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bodhi Platformer</title>
+    <title>Bodhi's Dreamworld</title>
 
     <script src="js/main.js" type="module" defer></script>
     <link rel="stylesheet" href="css/styles.css" />
@@ -20,7 +20,7 @@
       <div class="top-row"></div>
       <canvas></canvas>
       <div class="right">
-        <h1 class="title">Bodhi's Adventure</h1>
+        <h1 class="title">Bodhi's Dreamworld</h1>
         <div class="info-panel">
           <div class="main-info">
             <p id="level-display" class="info-display-center">
@@ -30,7 +30,11 @@
               Time: <span id="time-number">00:00</span>
             </p>
             <p id="treats-display" class="info-display-between">
-              Treats collected: <span id="treats-number">0</span>
+              Treats collected:
+              <span
+                ><span id="treats-collected">0</span> /
+                <span id="treats-total">0</span></span
+              >
             </p>
             <div class="btns info-display-between">
               <button id="help-btn">?</button>
