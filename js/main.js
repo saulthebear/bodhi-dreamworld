@@ -151,7 +151,8 @@ function updateTimer() {
     "0"
   )
   const timerString = `${minutes}:${seconds}`
-  document.querySelector("#time-number").innerText = timerString
+  const timerElements = document.querySelectorAll("#time-number")
+  timerElements.forEach((timer) => (timer.innerText = timerString))
 }
 
 /* Updates treats collected display in the DOM */
@@ -159,8 +160,12 @@ function updateTreats() {
   const total = game.world.totalTreats
   const remaining = game.world.treats.length
   const collected = total - remaining
-  document.querySelector("#treats-total").innerText = total
-  document.querySelector("#treats-collected").innerText = collected
+
+  const totalTreatsElements = document.querySelectorAll("#treats-total")
+  totalTreatsElements.forEach((ele) => (ele.innerText = total))
+
+  const collectedTreatsElements = document.querySelectorAll("#treats-collected")
+  collectedTreatsElements.forEach((ele) => (ele.innerText = collected))
 }
 
 // Sets the current level and starts the game at that level

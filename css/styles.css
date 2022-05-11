@@ -5,8 +5,10 @@
 }
 
 :root {
-  /* Used when resizing canvas in JS to give some margin */
+  /* Used when resizing canvas in JS
+  to reduce its width & height by this amount */
   --margin-inline: 30px;
+  /* Used to overlay information on the canvas at correct size */
   --canvas-margin: 3rem;
 }
 
@@ -25,8 +27,6 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  /* padding: 3rem; */
 }
 
 .canvas-container {
@@ -39,14 +39,24 @@ canvas {
   margin: var(--canvas-margin);
 }
 
-.level-complete {
+.canvas-overlay {
   /* Position over canvas */
   position: absolute;
   top: var(--canvas-margin);
   left: var(--canvas-margin);
   width: calc(100% - var(--canvas-margin) * 2);
   height: calc(100% - var(--canvas-margin) * 2);
+}
 
+.hud {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+
+  font-size: 2rem;
+}
+
+.level-complete {
   font-size: 3rem;
   background-color: rgba(129, 190, 216, 0.5);
 
