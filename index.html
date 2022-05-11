@@ -20,10 +20,17 @@
       <div class="canvas-container">
         <canvas></canvas>
         <div class="hud canvas-overlay">
-          <div><span id="time-number">00:00</span></div>
-          <div>
-            <span id="treats-collected">0</span> /
-            <span id="treats-total">0</span>
+          <div class="row">
+            <div><span id="time-number">00:00</span></div>
+            <div class="hud-treats">
+              <img
+                src="./sprites/fish-12x12.png"
+                alt="Treat icon"
+                class="treat-icon"
+              />
+              <span id="treats-collected">0</span> /
+              <span id="treats-total">0</span>
+            </div>
           </div>
         </div>
         <div class="level-complete canvas-overlay hidden" id="level-complete">

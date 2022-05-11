@@ -49,11 +49,24 @@ canvas {
 }
 
 .hud {
-  display: flex;
-  justify-content: space-between;
   padding: 0.5rem 1rem;
 
   font-size: 2rem;
+}
+
+.hud .row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.hud-treats {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.treat-icon {
+  height: 1.5rem;
 }
 
 .level-complete {
