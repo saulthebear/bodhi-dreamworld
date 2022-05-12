@@ -4,6 +4,8 @@ Bodhi's Dreamworld is a platform game where you guide Mr. Bodhi Bigglesworth thr
 
 This game was created by Stefan Vosloo for project 1 of General Assembly's Software Engineering Immersive.
 
+[Play the game](https://saulthebear.github.io/bodhi-dreamworld/)
+
 ## Table of contents
 
 - [Screenshot](#screenshot)
