@@ -1,22 +1,22 @@
-# Bodhi's Dreamworld
+# 😻 Bodhi's Dreamworld ☁️
 
 Bodhi's Dreamworld is a platform game where you guide Mr. Bodhi Bigglesworth through his dream to collect scattered treats and ultimately get into the big treat jar! Put your jumping and dodging skills to the test as you navigate the platforms and avoid the automated grooming brushes being launched your way.
 
 This game was created by Stefan Vosloo for project 1 of General Assembly's Software Engineering Immersive.
 
-[Play the game](https://saulthebear.github.io/bodhi-dreamworld/)
+[🕹 Play the game 🎮](https://saulthebear.github.io/bodhi-dreamworld/)
 
 ## Table of contents
 
-- [Screenshot](#screenshot)
-- [Overview](#overview)
-  - [The challenge](#the-challenge)
-  - [Links](#links)
-- [My process](#my-process)
-  - [Built with](#built-with)
-  - [What I learned](#what-i-learned)
-  - [Resources referenced](#resources-referenced)
-- [Author](#author)
+- [🖼 Screenshot](#screenshot)
+- [👀 Overview](#overview)
+  - [🏔 The challenge](#the-challenge)
+  - [🔗 Links](#links)
+- [⚙️ My process](#my-process)
+  - [🛠 Built with](#built-with)
+  - [🧠 What I learned](#what-i-learned)
+  - [🔎 Resources referenced](#resources-referenced)
+- [🧑‍💻 Author](#author)
 
 ## Screenshot
 
