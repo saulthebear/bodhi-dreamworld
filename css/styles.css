@@ -176,6 +176,21 @@ button.delete-btn {
   display: none;
 }
 
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 3rem;
+  background-color: #75afdb;
+  font-size: 1.3rem;
+}
+
+svg {
+  width: 1rem;
+}
+
 @media (max-width: 1400px) {
   main {
     flex-direction: column-reverse;
