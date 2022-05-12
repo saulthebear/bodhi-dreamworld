@@ -6,15 +6,19 @@ This game was created by Stefan Vosloo for project 1 of General Assembly's Softw
 
 ## Table of contents
 
+- [Screenshot](#screenshot)
 - [Overview](#overview)
   - [The challenge](#the-challenge)
-  - [Screenshot](#screenshot)
   - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
   - [Resources referenced](#resources-referenced)
 - [Author](#author)
+
+## Screenshot
+
+![](./screenshot.png)
 
 ## Overview
 
@@ -53,10 +57,6 @@ Personal Goals:
   - [x] Heads up display
   - [ ] Have viewport move with character, so that the whole level isn't visible at once
   - [ ] Double jumping / wall jumping for harder obstacles
-
-### Screenshot
-
-![](./screenshot.png)
 
 ### Links
 
