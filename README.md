@@ -48,7 +48,7 @@ Personal Goals:
   - [x] A button to show instructions
 - Stretch Goals:
   - [x] Add obstacles
-    - [x]A machine that shoots out brushes - Getting dazes the player for a few seconds
+    - [x] A machine that shoots out brushes - Getting dazes the player for a few seconds
     - [ ] A treadmill moving in the opposite direction of desired travel
     - [ ] A shower that intermittently turns on. Getting wet slows the player down
     - [ ] A timed dryer. If the player gets sucked in, they'll have to wait for the dryer to finish its cycle before it opens up
