@@ -6,9 +6,10 @@ import { BrushProjectile } from "./Projectile.js"
 // Level Maps
 import { level1Map } from "../levels/level1.js"
 import { level2Map } from "../levels/level2.js"
+import { level3Map } from "../levels/level3.js"
 
 export class Game {
-  static levels = [level1Map, level2Map]
+  static levels = [level1Map, level2Map, level3Map]
 
   constructor({ level }) {
     const blockSize = 6
