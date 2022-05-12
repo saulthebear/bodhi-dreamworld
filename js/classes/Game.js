@@ -8,13 +8,12 @@ import { level1Map } from "../levels/level1.js"
 import { level2Map } from "../levels/level2.js"
 
 export class Game {
+  static levels = [level1Map, level2Map]
+
   constructor({ level }) {
     const blockSize = 6
 
-    const levels = Object.create(null)
-    levels[1] = level1Map
-    levels[2] = level2Map
-    const currLevel = new Level(levels[level], blockSize)
+    const currLevel = new Level(Game.levels[level - 1], blockSize)
 
     this.world = new GameWorld(currLevel, blockSize)
     this.timer = 0

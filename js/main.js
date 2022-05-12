@@ -8,8 +8,9 @@ import { Controller } from "./classes/Controller.js"
  *****************/
 
 let currentLevel = 1
-// Number of levels that exist
-let availableLevels = 2
+// Number of levels that exist -- Derived from Game class
+let availableLevels = Game.levels.length
+let unlockedLevels = 1
 
 /*
   The engine is responsible for calling the update and render methods
@@ -41,6 +42,7 @@ let renderer
 */
 const controller = new Controller()
 
+const deleteDataBtn = document.querySelector("#delete-data-btn")
 const restartBtn = document.querySelector("#restart-btn")
 const helpBtn = document.querySelector("#help-btn")
 const prevLevelBtn = document.querySelector("#prev-level")
@@ -142,15 +144,20 @@ function handleInputEvent({ type, key }) {
   controller.handleKeyPress(type, key)
 }
 
-/* Updates DOM timer */
-function updateTimer() {
-  const totalSeconds = game.timer
+function secondsToTimerString(totalSeconds) {
   const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, "0")
   const seconds = String(Math.round(totalSeconds - minutes * 60)).padStart(
     2,
     "0"
   )
   const timerString = `${minutes}:${seconds}`
+  return timerString
+}
+
+/* Updates DOM timer */
+function updateTimer() {
+  const totalSeconds = game.timer
+  const timerString = secondsToTimerString(totalSeconds)
   const timerElements = document.querySelectorAll("#time-number")
   timerElements.forEach((timer) => (timer.innerText = timerString))
 }
@@ -180,7 +187,7 @@ function setLevel(levelNumber) {
 
 // Next level - callback for next level button
 function incrementLevel() {
-  if (currentLevel < availableLevels) setLevel(currentLevel + 1)
+  if (currentLevel < unlockedLevels) setLevel(currentLevel + 1)
 }
 
 // Prev level - callback for prev level button
@@ -194,7 +201,7 @@ function decrementLevel() {
 */
 function setupLevelButtons() {
   prevLevelBtn.disabled = currentLevel === 1
-  nextLevelBtn.disabled = currentLevel === availableLevels
+  nextLevelBtn.disabled = currentLevel === unlockedLevels
 }
 
 /*
@@ -209,6 +216,15 @@ function gameOver() {
   // Show level complete message
   const levelCompleteMessage = document.querySelector("#level-complete")
   levelCompleteMessage.classList.remove("hidden")
+
+  const treatsRemaining = game.world.treats.length
+  const isLevelCompleted = treatsRemaining === 0
+  const levelTime = game.timer
+
+  initializeLocalData()
+  saveLevelData(currentLevel, levelTime, isLevelCompleted)
+  updateUnlockedLevels()
+  showPersonalBest()
 }
 
 // Show / hide help - callback for help button click
@@ -233,10 +249,105 @@ function restart() {
     game.world.height
   )
 
+  setupLevelButtons()
+  updateUnlockedLevels()
+  showPersonalBest()
+
   // Resize the canvas to have correct aspect ratio and fit in the window
   handleResize()
 
   engine.start()
+}
+
+// Fill in blank information for missing levels
+// Return level data object
+function initializeLocalData() {
+  let levelData = {}
+
+  for (let i = 1; i <= availableLevels; i++) {
+    levelData[i] = {
+      unlocked: i === 1, // Level 1 is the only one unlocked
+      bestTime: Infinity,
+    }
+  }
+
+  // Overwrite levelData with values from local storage
+  // Ensures local storage has a value for each level, even if new ones have
+  // been added since last saved
+  let savedData = localStorage.getItem("levelData")
+  if (savedData) {
+    savedData = JSON.parse(savedData)
+    levelData = { ...levelData, ...savedData }
+  }
+
+  localStorage.setItem("levelData", JSON.stringify(levelData))
+  return levelData
+}
+
+function saveLevelData(levelNumber, time, isLevelCompleted) {
+  time = Math.round(time)
+
+  let prevBestTime = Infinity
+
+  let allLevelData = localStorage.getItem("levelData")
+  allLevelData = JSON.parse(allLevelData)
+  prevBestTime = allLevelData[levelNumber].bestTime || Infinity
+
+  const bestTime = time < prevBestTime ? time : prevBestTime
+
+  const currLevelData = { unlocked: true, bestTime }
+
+  // Unlock next level if current level has been completed
+  if (isLevelCompleted) {
+    const nextLevelData = allLevelData[levelNumber + 1]
+    console.log(nextLevelData)
+    if (nextLevelData) {
+      nextLevelData.unlocked = true
+      allLevelData[levelNumber + 1] = nextLevelData
+    }
+  }
+
+  allLevelData[levelNumber] = currLevelData
+
+  allLevelData = JSON.stringify(allLevelData)
+
+  localStorage.setItem("levelData", allLevelData)
+}
+
+function deleteSavedData() {
+  localStorage.removeItem("levelData")
+  setLevel(1)
+}
+
+function updateUnlockedLevels() {
+  // Ensure local data exists
+  const levelData = initializeLocalData()
+
+  // Find the highest unlocked level
+  let hightestUnlocked = 1
+  for (const level in levelData) {
+    if (level > hightestUnlocked && levelData[level].unlocked)
+      hightestUnlocked = +level
+  }
+
+  unlockedLevels = hightestUnlocked
+
+  // Show the user how many levels have been unlocked
+  const display = document.querySelector("#unlocked-levels-display")
+  display.innerText = `${unlockedLevels} / ${availableLevels} unlocked`
+
+  // Allow user to go to next level if unlocked
+  setupLevelButtons()
+}
+
+// Display personal best time
+function showPersonalBest() {
+  const levelData = initializeLocalData()
+
+  const bestTime = levelData[currentLevel].bestTime
+  const bestTimeString = secondsToTimerString(bestTime)
+  const bestTimeDisplay = document.querySelector("#pb-time-number")
+  bestTimeDisplay.innerText = bestTimeString
 }
 
 /******************************************************************************/
@@ -248,6 +359,7 @@ function restart() {
 
 prevLevelBtn.addEventListener("click", decrementLevel)
 nextLevelBtn.addEventListener("click", incrementLevel)
+deleteDataBtn.addEventListener("click", deleteSavedData)
 restartBtn.addEventListener("click", restart)
 helpBtn.addEventListener("click", helpToggle)
 

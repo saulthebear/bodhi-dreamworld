@@ -43,26 +43,53 @@
           <div class="main-info">
             <div id="level-display" class="level-display">
               <button id="prev-level"><</button>
-              <div>Level <span id="level-number">1</span></div>
+              <div>
+                <div class="center-text">
+                  Level <span id="level-number">1</span>
+                </div>
+                <div
+                  class="unlocked-levels-display center-text"
+                  id="unlocked-levels-display"
+                ></div>
+              </div>
               <button id="next-level">></button>
             </div>
-            <p id="time-display" class="info-display-between">
-              Time: <span id="time-number">00:00</span>
-            </p>
+
             <p id="treats-display" class="info-display-between">
-              Treats collected:
+              Treats:
               <span
                 ><span id="treats-collected">0</span> /
                 <span id="treats-total">0</span></span
               >
             </p>
-            <div class="btns info-display-between">
-              <button id="help-btn">?</button>
-              <button id="restart-btn">Restart</button>
+            <p id="time-display" class="info-display-between">
+              Time: <span id="time-number">00:00</span>
+            </p>
+            <p class="info-display-between">
+              Personal Best: <span id="pb-time-number"></span>
+            </p>
+            <div>
+              <div class="info-display-bottom">
+                <button id="delete-data-btn" class="delete-btn">
+                  Delete Saved Data
+                </button>
+              </div>
+              <div class="btns info-display-between">
+                <button id="help-btn">?</button>
+                <button id="restart-btn">Restart</button>
+              </div>
             </div>
           </div>
           <div class="help hidden">
-            <p>Help Bodhi get to the jar of treats!</p>
+            <p>Help Bodhi get to the big jar of treats!</p>
+            <ul>
+              <li>Collect all the treats to unlock the next level.</li>
+              <li>
+                Grooming's no fun! Avoid the flying brushes, or you'll get
+                knocked back.
+              </li>
+            </ul>
+            <p></p>
             <div class="controls">
               <p class="info-display-between">
                 <span>Left:</span> <span>A or Left Arrow</span>
