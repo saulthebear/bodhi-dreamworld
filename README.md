@@ -59,6 +59,7 @@ Personal Goals:
   - [x] Heads up display
   - [ ] Have viewport move with character, so that the whole level isn't visible at once
   - [ ] Double jumping / wall jumping for harder obstacles
+  - [x] Favicon
 
 ### Links
 
