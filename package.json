@@ -18,5 +18,8 @@
   "homepage": "https://github.com/saulthebear/bodhi-dreamworld#readme",
   "devDependencies": {
     "jsdoc": "^3.6.10"
+  },
+  "dependencies": {
+    "clean-jsdoc-theme": "^3.3.4"
   }
 }

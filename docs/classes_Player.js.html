@@ -1,25 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>JSDoc: Source: classes/Player.js</title>
 
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Adding favicon -->
+    
+
+    <!-- Adding meta -->
+    
+
+    <!-- Adding external script-->
+    
+
+    <!-- Adding external style-->
+    
+
+    <!-- Adding scripts-->
+    
+
+    <!-- Adding style-->
+    
+
+    <!-- Adding overlay script-->
+    
+
+    <!-- Adding overlay style-->
+    
+
+
+    <title>
+      classes/Player.js
+    </title>
+
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
-</head>
-
-<body>
-
-<div id="main">
-
-    <h1 class="page-title">Source: classes/Player.js</h1>
-
+    <link type="text/css" rel="stylesheet" href="styles/third-party/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/third-party/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/reset.css">
+    <link type="text/css" rel="stylesheet" href="styles/clean-jsdoc-theme-base.css">
+    <link type="text/css" rel="stylesheet" href="styles/clean-jsdoc-theme-dark.css">
     
+    <svg aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    style="display:none">
+    <defs>
+        <symbol id="copy-icon" viewbox="0 0 488.3 488.3">
+            <g>
+                <path
+                    d="M314.25,85.4h-227c-21.3,0-38.6,17.3-38.6,38.6v325.7c0,21.3,17.3,38.6,38.6,38.6h227c21.3,0,38.6-17.3,38.6-38.6V124    C352.75,102.7,335.45,85.4,314.25,85.4z M325.75,449.6c0,6.4-5.2,11.6-11.6,11.6h-227c-6.4,0-11.6-5.2-11.6-11.6V124    c0-6.4,5.2-11.6,11.6-11.6h227c6.4,0,11.6,5.2,11.6,11.6V449.6z" />
+                <path
+                    d="M401.05,0h-227c-21.3,0-38.6,17.3-38.6,38.6c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5c0-6.4,5.2-11.6,11.6-11.6h227    c6.4,0,11.6,5.2,11.6,11.6v325.7c0,6.4-5.2,11.6-11.6,11.6c-7.5,0-13.5,6-13.5,13.5s6,13.5,13.5,13.5c21.3,0,38.6-17.3,38.6-38.6    V38.6C439.65,17.3,422.35,0,401.05,0z" />
+            </g>
+        </symbol>
+        <symbol id='search-icon' viewBox="0 0 512 512">
+            <g>
+                <g>
+                    <path
+                        d="M225.474,0C101.151,0,0,101.151,0,225.474c0,124.33,101.151,225.474,225.474,225.474    c124.33,0,225.474-101.144,225.474-225.474C450.948,101.151,349.804,0,225.474,0z M225.474,409.323    c-101.373,0-183.848-82.475-183.848-183.848S124.101,41.626,225.474,41.626s183.848,82.475,183.848,183.848    S326.847,409.323,225.474,409.323z" />
+                </g>
+            </g>
+            <g>
+                <g>
+                    <path
+                        d="M505.902,476.472L386.574,357.144c-8.131-8.131-21.299-8.131-29.43,0c-8.131,8.124-8.131,21.306,0,29.43l119.328,119.328    c4.065,4.065,9.387,6.098,14.715,6.098c5.321,0,10.649-2.033,14.715-6.098C514.033,497.778,514.033,484.596,505.902,476.472z" />
+                </g>
+            </g>
+        </symbol>
+        <symbol id="down-icon" viewBox="0 0 16 16">
+            <path 
+                fill-rule="evenodd" 
+                clip-rule="evenodd" 
+                d="M12.7803 6.21967C13.0732 6.51256 13.0732 6.98744 12.7803 7.28033L8.53033 11.5303C8.23744 11.8232 7.76256 11.8232 7.46967 11.5303L3.21967 7.28033C2.92678 6.98744 2.92678 6.51256 3.21967 6.21967C3.51256 5.92678 3.98744 5.92678 4.28033 6.21967L8 9.93934L11.7197 6.21967C12.0126 5.92678 12.4874 5.92678 12.7803 6.21967Z"
+            >
+            </path>
+        </symbol>
+    </defs>
+</svg>
+  </head>
+
+  <body>
+
+    <nav class="navbar" id="navbar">
+      <div class="navbar-heading" id="navbar-heading"><a href="index.html"><h2 class="navbar-heading-text">Home</h2></a></div><div class="search-box" id="search-box"><div class="search-box-input-container"><input class="search-box-input" type="text" placeholder="Search..." id="search-box-input" /><svg class="search-icon" alt="search-icon"><use xlink:href="#search-icon"></use></svg></div><div class="search-item-container" id="search-item-container"><ul class="search-item-ul" id="search-item-ul"></ul></div></div><div class="sidebar-main-content" id="sidebar-main-content"><div class="accordion collapsed" id="5969402" > <h3 class="accordion-heading">Classes<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion collapsed child" id=4539763><div class="accordion-heading child"><a href="BrushProjectile.html">BrushProjectile</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="BrushProjectile.html#collide">collide</a></li><li data-type='method'><a href="BrushProjectile.html#isColliding">isColliding</a></li><li data-type='method'><a href="BrushProjectile.html#isOutOfBounds">isOutOfBounds</a></li><li data-type='method'><a href="BrushProjectile.html#isWithinHeight">isWithinHeight</a></li><li data-type='method'><a href="BrushProjectile.html#isWithinWidth">isWithinWidth</a></li><li data-type='method'><a href="BrushProjectile.html#update">update</a></li></ul></li><li class="accordion collapsed child" id=1611688><div class="accordion-heading child"><a href="Controller.html">Controller</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Controller.html#handleKeyPress">handleKeyPress</a></li></ul></li><li class="accordion collapsed child" id=8046034><div class="accordion-heading child"><a href="Engine.html">Engine</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Engine.html#start">start</a></li><li data-type='method'><a href="Engine.html#stop">stop</a></li></ul></li><li class="accordion collapsed child" id=5503863><div class="accordion-heading child"><a href="Game.html">Game</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Game.html#update">update</a></li></ul></li><li class="accordion collapsed child" id=1491297><div class="accordion-heading child"><a href="GameObject.html">GameObject</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="GameObject.html#isColliding">isColliding</a></li><li data-type='method'><a href="GameObject.html#isWithinHeight">isWithinHeight</a></li><li data-type='method'><a href="GameObject.html#isWithinWidth">isWithinWidth</a></li></ul></li><li class="accordion collapsed child" id=9667083><div class="accordion-heading child"><a href="GameWorld.html">GameWorld</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="GameWorld.html#collideWithWorldEdge">collideWithWorldEdge</a></li><li data-type='method'><a href="GameWorld.html#update">update</a></li></ul></li><li class="accordion collapsed child" id=8024330><div class="accordion-heading child"><a href="GoalObject.html">GoalObject</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="GoalObject.html#isColliding">isColliding</a></li><li data-type='method'><a href="GoalObject.html#isWithinHeight">isWithinHeight</a></li><li data-type='method'><a href="GoalObject.html#isWithinWidth">isWithinWidth</a></li></ul></li><li class="accordion-list" id=""><a href="Level.html">Level</a></li><li class="accordion collapsed child" id=93981><div class="accordion-heading child"><a href="Platform.html">Platform</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Platform.html#applyColliders">applyColliders</a></li><li data-type='method'><a href="Platform.html#collideBottom">collideBottom</a></li><li data-type='method'><a href="Platform.html#collideLeft">collideLeft</a></li><li data-type='method'><a href="Platform.html#collideRight">collideRight</a></li><li data-type='method'><a href="Platform.html#collideTop">collideTop</a></li><li data-type='method'><a href="Platform.html#isColliding">isColliding</a></li><li data-type='method'><a href="Platform.html#isWithinHeight">isWithinHeight</a></li><li data-type='method'><a href="Platform.html#isWithinWidth">isWithinWidth</a></li></ul></li><li class="accordion collapsed child" id=7343103><div class="accordion-heading child"><a href="Player.html">Player</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Player.html#isColliding">isColliding</a></li><li data-type='method'><a href="Player.html#isWithinHeight">isWithinHeight</a></li><li data-type='method'><a href="Player.html#isWithinWidth">isWithinWidth</a></li><li data-type='method'><a href="Player.html#jump">jump</a></li><li data-type='method'><a href="Player.html#moveLeft">moveLeft</a></li><li data-type='method'><a href="Player.html#moveRight">moveRight</a></li><li data-type='method'><a href="Player.html#stopJump">stopJump</a></li><li data-type='method'><a href="Player.html#update">update</a></li></ul></li><li class="accordion collapsed child" id=8938346><div class="accordion-heading child"><a href="Renderer.html">Renderer</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Renderer.html#drawImage">drawImage</a></li><li data-type='method'><a href="Renderer.html#drawObject">drawObject</a></li><li data-type='method'><a href="Renderer.html#drawRectangle">drawRectangle</a></li><li data-type='method'><a href="Renderer.html#fill">fill</a></li><li data-type='method'><a href="Renderer.html#render">render</a></li><li data-type='method'><a href="Renderer.html#resizeCanvas">resizeCanvas</a></li></ul></li><li class="accordion collapsed child" id=396138><div class="accordion-heading child"><a href="Sprite.html">Sprite</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Sprite.html#frame">frame</a></li><li data-type='method'><a href="Sprite.html#incrementFrame">incrementFrame</a></li></ul></li><li class="accordion collapsed child" id=6021104><div class="accordion-heading child"><a href="Treat.html">Treat</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Treat.html#collide">collide</a></li><li data-type='method'><a href="Treat.html#isColliding">isColliding</a></li><li data-type='method'><a href="Treat.html#isWithinHeight">isWithinHeight</a></li><li data-type='method'><a href="Treat.html#isWithinWidth">isWithinWidth</a></li><li data-type='method'><a href="Treat.html#update">update</a></li></ul></li></ul> </div><div class="accordion collapsed" id="5087206" > <h3 class="accordion-heading">Global<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="global.html#availableLevels">availableLevels</a></li><li class="accordion-list" id=""><a href="global.html#Bounds">Bounds</a></li><li class="accordion-list" id=""><a href="global.html#BrushSpawn">BrushSpawn</a></li><li class="accordion-list" id=""><a href="global.html#CollisionDirections">CollisionDirections</a></li><li class="accordion-list" id=""><a href="global.html#controller">controller</a></li><li class="accordion-list" id=""><a href="global.html#currentLevel">currentLevel</a></li><li class="accordion-list" id=""><a href="global.html#decrementLevel">decrementLevel</a></li><li class="accordion-list" id=""><a href="global.html#deleteDataBtn">deleteDataBtn</a></li><li class="accordion-list" id=""><a href="global.html#deleteSavedData">deleteSavedData</a></li><li class="accordion-list" id=""><a href="global.html#DetailedLevelObject">DetailedLevelObject</a></li><li class="accordion-list" id=""><a href="global.html#engine">engine</a></li><li class="accordion-list" id=""><a href="global.html#EngineConfig">EngineConfig</a></li><li class="accordion-list" id=""><a href="global.html#game">game</a></li><li class="accordion-list" id=""><a href="global.html#GameConfig">GameConfig</a></li><li class="accordion-list" id=""><a href="global.html#gameOver">gameOver</a></li><li class="accordion-list" id=""><a href="global.html#handleInputEvent">handleInputEvent</a></li><li class="accordion-list" id=""><a href="global.html#handleResize">handleResize</a></li><li class="accordion-list" id=""><a href="global.html#helpBtn">helpBtn</a></li><li class="accordion-list" id=""><a href="global.html#helpToggle">helpToggle</a></li><li class="accordion-list" id=""><a href="global.html#ImageInfo">ImageInfo</a></li><li class="accordion-list" id=""><a href="global.html#incrementLevel">incrementLevel</a></li><li class="accordion-list" id=""><a href="global.html#initializeLocalData">initializeLocalData</a></li><li class="accordion-list" id=""><a href="global.html#nextLevelBtn">nextLevelBtn</a></li><li class="accordion-list" id=""><a href="global.html#prevLevelBtn">prevLevelBtn</a></li><li class="accordion-list" id=""><a href="global.html#render">render</a></li><li class="accordion-list" id=""><a href="global.html#renderer">renderer</a></li><li class="accordion-list" id=""><a href="global.html#restart">restart</a></li><li class="accordion-list" id=""><a href="global.html#restartBtn">restartBtn</a></li><li class="accordion-list" id=""><a href="global.html#SaveData">SaveData</a></li><li class="accordion-list" id=""><a href="global.html#saveLevelData">saveLevelData</a></li><li class="accordion-list" id=""><a href="global.html#secondsToTimerString">secondsToTimerString</a></li><li class="accordion-list" id=""><a href="global.html#setLevel">setLevel</a></li><li class="accordion-list" id=""><a href="global.html#setupLevelButtons">setupLevelButtons</a></li><li class="accordion-list" id=""><a href="global.html#showPersonalBest">showPersonalBest</a></li><li class="accordion-list" id=""><a href="global.html#SimpleLevelObject">SimpleLevelObject</a></li><li class="accordion-list" id=""><a href="global.html#SpriteConfig">SpriteConfig</a></li><li class="accordion-list" id=""><a href="global.html#unlockedLevels">unlockedLevels</a></li><li class="accordion-list" id=""><a href="global.html#update">update</a></li><li class="accordion-list" id=""><a href="global.html#updateTimer">updateTimer</a></li><li class="accordion-list" id=""><a href="global.html#updateTreats">updateTreats</a></li><li class="accordion-list" id=""><a href="global.html#updateUnlockedLevels">updateUnlockedLevels</a></li></ul> </div>
+      
+
+    </nav>
+    <div class="navbar-ham" id="navbar-ham">
+      <div>
+        <div class="first"></div>
+        <div class="second"></div>
+        <div class="third"></div>
+      </div>
+    </div>
+
+    <div id="main" class="main-content">
+      
+      <h1 id='page-title' class="page-title">
+        classes/Player.js
+      </h1>
+      
+
+      
 
 
 
@@ -252,19 +335,37 @@ export class Player extends GameObject {
 
 
 
-</div>
+    </div>
 
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BrushProjectile.html">BrushProjectile</a></li><li><a href="Controller.html">Controller</a></li><li><a href="Engine.html">Engine</a></li><li><a href="Game.html">Game</a></li><li><a href="GameObject.html">GameObject</a></li><li><a href="GameWorld.html">GameWorld</a></li><li><a href="GoalObject.html">GoalObject</a></li><li><a href="Level.html">Level</a></li><li><a href="Platform.html">Platform</a></li><li><a href="Player.html">Player</a></li><li><a href="Renderer.html">Renderer</a></li><li><a href="Sprite.html">Sprite</a></li><li><a href="Treat.html">Treat</a></li></ul><h3>Global</h3><ul><li><a href="global.html#availableLevels">availableLevels</a></li><li><a href="global.html#controller">controller</a></li><li><a href="global.html#currentLevel">currentLevel</a></li><li><a href="global.html#decrementLevel">decrementLevel</a></li><li><a href="global.html#deleteDataBtn">deleteDataBtn</a></li><li><a href="global.html#deleteSavedData">deleteSavedData</a></li><li><a href="global.html#engine">engine</a></li><li><a href="global.html#game">game</a></li><li><a href="global.html#gameOver">gameOver</a></li><li><a href="global.html#handleInputEvent">handleInputEvent</a></li><li><a href="global.html#handleResize">handleResize</a></li><li><a href="global.html#helpBtn">helpBtn</a></li><li><a href="global.html#helpToggle">helpToggle</a></li><li><a href="global.html#incrementLevel">incrementLevel</a></li><li><a href="global.html#initializeLocalData">initializeLocalData</a></li><li><a href="global.html#nextLevelBtn">nextLevelBtn</a></li><li><a href="global.html#prevLevelBtn">prevLevelBtn</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#renderer">renderer</a></li><li><a href="global.html#restart">restart</a></li><li><a href="global.html#restartBtn">restartBtn</a></li><li><a href="global.html#saveLevelData">saveLevelData</a></li><li><a href="global.html#secondsToTimerString">secondsToTimerString</a></li><li><a href="global.html#setLevel">setLevel</a></li><li><a href="global.html#setupLevelButtons">setupLevelButtons</a></li><li><a href="global.html#showPersonalBest">showPersonalBest</a></li><li><a href="global.html#unlockedLevels">unlockedLevels</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#updateTimer">updateTimer</a></li><li><a href="global.html#updateTreats">updateTreats</a></li><li><a href="global.html#updateUnlockedLevels">updateUnlockedLevels</a></li></ul>
-</nav>
+    <footer class="footer" id="footer">
+      
+    </footer>
 
-<br class="clear">
+    <script src="scripts/third-party/prettify.js"></script>
+    <script src="scripts/third-party/lang-css.js"></script>
+    <script type="text/javascript" src="scripts/misc.js"></script>
 
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Fri May 13 2022 01:00:07 GMT-0600 (Mountain Daylight Time)
-</footer>
+    <script>prettyPrint();</script>
+    <script src="scripts/linenumber.js"></script>
+    <script src="scripts/fix-code-block.js"></script>
+    <script src="scripts/fix-navbar.js"></script>
+    
+      <script src="scripts/search.js"></script>
+      <script src="scripts/third-party/fuse.js"></script>
+      <script>
+        var list = [{"title":"BrushProjectile","link":"<a href=\"BrushProjectile.html\">BrushProjectile</a>"},{"title":"BrushProjectile#collide","link":"<a href=\"BrushProjectile.html#collide\">BrushProjectile &rtrif; collide</a>"},{"title":"BrushProjectile#isColliding","link":"<a href=\"BrushProjectile.html#isColliding\">BrushProjectile &rtrif; isColliding</a>"},{"title":"BrushProjectile#isOutOfBounds","link":"<a href=\"BrushProjectile.html#isOutOfBounds\">BrushProjectile &rtrif; isOutOfBounds</a>"},{"title":"BrushProjectile#isWithinHeight","link":"<a href=\"BrushProjectile.html#isWithinHeight\">BrushProjectile &rtrif; isWithinHeight</a>"},{"title":"BrushProjectile#isWithinWidth","link":"<a href=\"BrushProjectile.html#isWithinWidth\">BrushProjectile &rtrif; isWithinWidth</a>"},{"title":"BrushProjectile#update","link":"<a href=\"BrushProjectile.html#update\">BrushProjectile &rtrif; update</a>"},{"title":"Controller","link":"<a href=\"Controller.html\">Controller</a>"},{"title":"Controller#handleKeyPress","link":"<a href=\"Controller.html#handleKeyPress\">Controller &rtrif; handleKeyPress</a>"},{"title":"Engine","link":"<a href=\"Engine.html\">Engine</a>"},{"title":"Engine#start","link":"<a href=\"Engine.html#start\">Engine &rtrif; start</a>"},{"title":"Engine#stop","link":"<a href=\"Engine.html#stop\">Engine &rtrif; stop</a>"},{"title":"Game","link":"<a href=\"Game.html\">Game</a>"},{"title":"Game#update","link":"<a href=\"Game.html#update\">Game &rtrif; update</a>"},{"title":"GameObject","link":"<a href=\"GameObject.html\">GameObject</a>"},{"title":"GameObject#isColliding","link":"<a href=\"GameObject.html#isColliding\">GameObject &rtrif; isColliding</a>"},{"title":"GameObject#isWithinHeight","link":"<a href=\"GameObject.html#isWithinHeight\">GameObject &rtrif; isWithinHeight</a>"},{"title":"GameObject#isWithinWidth","link":"<a href=\"GameObject.html#isWithinWidth\">GameObject &rtrif; isWithinWidth</a>"},{"title":"GameWorld","link":"<a href=\"GameWorld.html\">GameWorld</a>"},{"title":"GameWorld#collideWithWorldEdge","link":"<a href=\"GameWorld.html#collideWithWorldEdge\">GameWorld &rtrif; collideWithWorldEdge</a>"},{"title":"GameWorld#update","link":"<a href=\"GameWorld.html#update\">GameWorld &rtrif; update</a>"},{"title":"GoalObject","link":"<a href=\"GoalObject.html\">GoalObject</a>"},{"title":"GoalObject#isColliding","link":"<a href=\"GoalObject.html#isColliding\">GoalObject &rtrif; isColliding</a>"},{"title":"GoalObject#isWithinHeight","link":"<a href=\"GoalObject.html#isWithinHeight\">GoalObject &rtrif; isWithinHeight</a>"},{"title":"GoalObject#isWithinWidth","link":"<a href=\"GoalObject.html#isWithinWidth\">GoalObject &rtrif; isWithinWidth</a>"},{"title":"Level","link":"<a href=\"Level.html\">Level</a>"},{"title":"Platform","link":"<a href=\"Platform.html\">Platform</a>"},{"title":"Platform#applyColliders","link":"<a href=\"Platform.html#applyColliders\">Platform &rtrif; applyColliders</a>"},{"title":"Platform#collideBottom","link":"<a href=\"Platform.html#collideBottom\">Platform &rtrif; collideBottom</a>"},{"title":"Platform#collideLeft","link":"<a href=\"Platform.html#collideLeft\">Platform &rtrif; collideLeft</a>"},{"title":"Platform#collideRight","link":"<a href=\"Platform.html#collideRight\">Platform &rtrif; collideRight</a>"},{"title":"Platform#collideTop","link":"<a href=\"Platform.html#collideTop\">Platform &rtrif; collideTop</a>"},{"title":"Platform#isColliding","link":"<a href=\"Platform.html#isColliding\">Platform &rtrif; isColliding</a>"},{"title":"Platform#isWithinHeight","link":"<a href=\"Platform.html#isWithinHeight\">Platform &rtrif; isWithinHeight</a>"},{"title":"Platform#isWithinWidth","link":"<a href=\"Platform.html#isWithinWidth\">Platform &rtrif; isWithinWidth</a>"},{"title":"Player","link":"<a href=\"Player.html\">Player</a>"},{"title":"Player#isColliding","link":"<a href=\"Player.html#isColliding\">Player &rtrif; isColliding</a>"},{"title":"Player#isWithinHeight","link":"<a href=\"Player.html#isWithinHeight\">Player &rtrif; isWithinHeight</a>"},{"title":"Player#isWithinWidth","link":"<a href=\"Player.html#isWithinWidth\">Player &rtrif; isWithinWidth</a>"},{"title":"Player#jump","link":"<a href=\"Player.html#jump\">Player &rtrif; jump</a>"},{"title":"Player#moveLeft","link":"<a href=\"Player.html#moveLeft\">Player &rtrif; moveLeft</a>"},{"title":"Player#moveRight","link":"<a href=\"Player.html#moveRight\">Player &rtrif; moveRight</a>"},{"title":"Player#stopJump","link":"<a href=\"Player.html#stopJump\">Player &rtrif; stopJump</a>"},{"title":"Player#update","link":"<a href=\"Player.html#update\">Player &rtrif; update</a>"},{"title":"Renderer","link":"<a href=\"Renderer.html\">Renderer</a>"},{"title":"Renderer#drawImage","link":"<a href=\"Renderer.html#drawImage\">Renderer &rtrif; drawImage</a>"},{"title":"Renderer#drawObject","link":"<a href=\"Renderer.html#drawObject\">Renderer &rtrif; drawObject</a>"},{"title":"Renderer#drawRectangle","link":"<a href=\"Renderer.html#drawRectangle\">Renderer &rtrif; drawRectangle</a>"},{"title":"Renderer#fill","link":"<a href=\"Renderer.html#fill\">Renderer &rtrif; fill</a>"},{"title":"Renderer#render","link":"<a href=\"Renderer.html#render\">Renderer &rtrif; render</a>"},{"title":"Renderer#resizeCanvas","link":"<a href=\"Renderer.html#resizeCanvas\">Renderer &rtrif; resizeCanvas</a>"},{"title":"Sprite","link":"<a href=\"Sprite.html\">Sprite</a>"},{"title":"Sprite#frame","link":"<a href=\"Sprite.html#frame\">Sprite &rtrif; frame</a>"},{"title":"Sprite#incrementFrame","link":"<a href=\"Sprite.html#incrementFrame\">Sprite &rtrif; incrementFrame</a>"},{"title":"Treat","link":"<a href=\"Treat.html\">Treat</a>"},{"title":"Treat#collide","link":"<a href=\"Treat.html#collide\">Treat &rtrif; collide</a>"},{"title":"Treat#isColliding","link":"<a href=\"Treat.html#isColliding\">Treat &rtrif; isColliding</a>"},{"title":"Treat#isWithinHeight","link":"<a href=\"Treat.html#isWithinHeight\">Treat &rtrif; isWithinHeight</a>"},{"title":"Treat#isWithinWidth","link":"<a href=\"Treat.html#isWithinWidth\">Treat &rtrif; isWithinWidth</a>"},{"title":"Treat#update","link":"<a href=\"Treat.html#update\">Treat &rtrif; update</a>"},{"title":"availableLevels","link":"<a href=\"global.html#availableLevels\">availableLevels</a>"},{"title":"Bounds","link":"<a href=\"global.html#Bounds\">Bounds</a>"},{"title":"BrushSpawn","link":"<a href=\"global.html#BrushSpawn\">BrushSpawn</a>"},{"title":"CollisionDirections","link":"<a href=\"global.html#CollisionDirections\">CollisionDirections</a>"},{"title":"controller","link":"<a href=\"global.html#controller\">controller</a>"},{"title":"currentLevel","link":"<a href=\"global.html#currentLevel\">currentLevel</a>"},{"title":"decrementLevel","link":"<a href=\"global.html#decrementLevel\">decrementLevel</a>"},{"title":"deleteDataBtn","link":"<a href=\"global.html#deleteDataBtn\">deleteDataBtn</a>"},{"title":"deleteSavedData","link":"<a href=\"global.html#deleteSavedData\">deleteSavedData</a>"},{"title":"DetailedLevelObject","link":"<a href=\"global.html#DetailedLevelObject\">DetailedLevelObject</a>"},{"title":"engine","link":"<a href=\"global.html#engine\">engine</a>"},{"title":"EngineConfig","link":"<a href=\"global.html#EngineConfig\">EngineConfig</a>"},{"title":"game","link":"<a href=\"global.html#game\">game</a>"},{"title":"GameConfig","link":"<a href=\"global.html#GameConfig\">GameConfig</a>"},{"title":"gameOver","link":"<a href=\"global.html#gameOver\">gameOver</a>"},{"title":"handleInputEvent","link":"<a href=\"global.html#handleInputEvent\">handleInputEvent</a>"},{"title":"handleResize","link":"<a href=\"global.html#handleResize\">handleResize</a>"},{"title":"helpBtn","link":"<a href=\"global.html#helpBtn\">helpBtn</a>"},{"title":"helpToggle","link":"<a href=\"global.html#helpToggle\">helpToggle</a>"},{"title":"ImageInfo","link":"<a href=\"global.html#ImageInfo\">ImageInfo</a>"},{"title":"incrementLevel","link":"<a href=\"global.html#incrementLevel\">incrementLevel</a>"},{"title":"initializeLocalData","link":"<a href=\"global.html#initializeLocalData\">initializeLocalData</a>"},{"title":"nextLevelBtn","link":"<a href=\"global.html#nextLevelBtn\">nextLevelBtn</a>"},{"title":"prevLevelBtn","link":"<a href=\"global.html#prevLevelBtn\">prevLevelBtn</a>"},{"title":"render","link":"<a href=\"global.html#render\">render</a>"},{"title":"renderer","link":"<a href=\"global.html#renderer\">renderer</a>"},{"title":"restart","link":"<a href=\"global.html#restart\">restart</a>"},{"title":"restartBtn","link":"<a href=\"global.html#restartBtn\">restartBtn</a>"},{"title":"SaveData","link":"<a href=\"global.html#SaveData\">SaveData</a>"},{"title":"saveLevelData","link":"<a href=\"global.html#saveLevelData\">saveLevelData</a>"},{"title":"secondsToTimerString","link":"<a href=\"global.html#secondsToTimerString\">secondsToTimerString</a>"},{"title":"setLevel","link":"<a href=\"global.html#setLevel\">setLevel</a>"},{"title":"setupLevelButtons","link":"<a href=\"global.html#setupLevelButtons\">setupLevelButtons</a>"},{"title":"showPersonalBest","link":"<a href=\"global.html#showPersonalBest\">showPersonalBest</a>"},{"title":"SimpleLevelObject","link":"<a href=\"global.html#SimpleLevelObject\">SimpleLevelObject</a>"},{"title":"SpriteConfig","link":"<a href=\"global.html#SpriteConfig\">SpriteConfig</a>"},{"title":"unlockedLevels","link":"<a href=\"global.html#unlockedLevels\">unlockedLevels</a>"},{"title":"update","link":"<a href=\"global.html#update\">update</a>"},{"title":"updateTimer","link":"<a href=\"global.html#updateTimer\">updateTimer</a>"},{"title":"updateTreats","link":"<a href=\"global.html#updateTreats\">updateTreats</a>"},{"title":"updateUnlockedLevels","link":"<a href=\"global.html#updateUnlockedLevels\">updateUnlockedLevels</a>"}];
+        var options = 
+          setupSearch(list, options)
+      </script>
+    
 
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
-</body>
+    
+
+    
+
+    
+
+
+  </body>
+
 </html>
