@@ -57,22 +57,25 @@ Personal Goals:
   - [x] Multiple levels
   - [x] Let user select level
   - [x] Heads up display
+  - [x] Favicon
+  - [x] Complete code documentation
   - [ ] Have viewport move with character, so that the whole level isn't visible at once
   - [ ] Double jumping / wall jumping for harder obstacles
-  - [x] Favicon
 
 ### Links
 
-- Live Site URL: [Github Pages](https://saulthebear.github.io/bodhi-dreamworld/)
+- Live Site: [Github Pages](https://saulthebear.github.io/bodhi-dreamworld/)
+- Documentation: [Docs](https://saulthebear.github.io/bodhi-dreamworld/docs)
 - Original Project Pitch and Wireframes: [Github README](./Project%20Pitch.md)
 
 ## My process
 
 ### Built with
 
-- Vanilla JavaScript (no third-party libraries)
+- Vanilla JavaScript (no third-party libraries, except for documentation tool)
 - HTML5 canvas
 - CSS
+- JSDoc - To generate a documentation website from code comments
 
 - An Object Oriented approach was used
   - A MVC pattern was used, dividing main responsibilities between a Game, Renderer, and Controller class
@@ -85,6 +88,8 @@ Personal Goals:
 This project taught me a lot about organizing my code and the importance of loose coupling. Starting with this approach helped me immensely in being able to expand and extend the game quickly after developing the MVP.
 
 I also learned a lot about game development and animation in general. Having never developed any games or animated anything before, I had to learn about rendering and update loops from scratch. I implemented a fixed time step engine (relying heavily on Jake Gordon and Frank Poth's guides linked in the resources section), which keeps the game running at a consistent speed regardless of the machine it runs on. I also learned how to use sprite sheets to create an animated character.
+
+This project also taught me how to document code properly. I used JSDoc comments to document every class, variable, and function, which allowed me to generate a documentation website. The process of documenting the code forced me to really understand every bit of code and what its purpose is, which allowed me to find opportunities for refactoring to make it even clearer. This documentation will also serve to remind me of how the program works when I come back to it in the future. While I believe in "self-documenting code" I think its even better to have both self-documenting code and explicit documentation, as the documentation can be referenced independently and give an overview of the whole program.
 
 I am very happy that I was able to implement a level map editor. This consisted of a simple multi-line string which is then parsed to determine the size of the game world as well as the placement of game objects. This allowed me to quickly add multiple levels, and easily test and tweak them. The level map strings are designed to be both human readable and easily parsable by the computer. To continue building on this I would love to extend it to be able to determine both the width and height of objects. The way it works at the moment is by reading the file one line at a time, determining an object's x and y position and its width, but the height is just set to the block height of a single line.
 
