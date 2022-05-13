@@ -4,7 +4,8 @@
   "description": "A JS / HTML5 canvas platform game",
   "main": "main.js",
   "scripts": {
-    "doc": "jsdoc -c jsdoc.json"
+    "doc": "jsdoc -c jsdoc.json",
+    "build": "babel js -d lib"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,9 @@
   },
   "homepage": "https://github.com/saulthebear/bodhi-dreamworld#readme",
   "devDependencies": {
+    "@babel/cli": "^7.17.10",
+    "@babel/core": "^7.17.10",
+    "@babel/preset-env": "^7.17.10",
     "jsdoc": "^3.6.10"
   },
   "dependencies": {
