@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: classes/Renderer.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: classes/Renderer.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Handles rendering to the canvas.
+ * When an something is drawn it is first added to an offscreen canvas (buffer),
+ * and that buffer is drawn to the onscreen canvas only when render() is called.
+ * This optimizes performance.
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Optimizing_canvas
+ */
+export class Renderer {
+  /**
+   * Offscreen canvas's context to prerender to.
+   * @type {CanvasRenderingContext2D}
+   */
+  #buffer
+
+  /**
+   * Onscreen canvas context
+   * @type {CanvasRenderingContext2D}
+   */
+  #ctx
+
+  /**
+   * @param {HTMLCanvasElement} canvas - Onscreen canvas
+   * @param {number} worldWidth - The width of the world that will be rendered,
+   * in pixels
+   * @param {number} worldHeight - The height of the world that will be rendered,
+   * in pixels.
+   */
+  constructor(canvas, worldWidth, worldHeight) {
+    this.#buffer = document.createElement("canvas").getContext("2d")
+    this.#ctx = canvas.getContext("2d")
+
+    this.#buffer.canvas.width = worldWidth
+    this.#buffer.canvas.height = worldHeight
+  }
+
+  /**
+   * Draw the buffer to the onscreen canvas
+   */
+  render() {
+    this.#ctx.drawImage(
+      this.#buffer.canvas,
+      0,
+      0,
+      this.#buffer.canvas.width,
+      this.#buffer.canvas.height,
+      0,
+      0,
+      this.#ctx.canvas.width,
+      this.#ctx.canvas.height
+    )
+  }
+
+  /**
+   * Fill the canvas with a solid color.
+   * @param {string} color - Color to draw
+   */
+  fill(color) {
+    this.#buffer.fillStyle = color
+    this.#buffer.fillRect(
+      0,
+      0,
+      this.#buffer.canvas.width,
+      this.#buffer.canvas.height
+    )
+  }
+
+  /**
+   * Draw a rectangle on the canvas
+   * @param {number} x - horizontal starting position
+   * @param {number} y - vertical starting position
+   * @param {number} width - rectangle width, in pixels
+   * @param {number} height - rectangle height, in pixels
+   * @param {string} color - color to fill the rectangle with
+   */
+  drawRectangle(x, y, width, height, color) {
+    this.#buffer.fillStyle = color
+    this.#buffer.fillRect(x, y, width, height)
+  }
+
+  /**
+   * Draw a game object on the canvas, as a solid rectangle.
+   * @param {GameObject} object - the object to draw
+   */
+  drawObject({ x, y, width, height, color }) {
+    this.drawRectangle(x, y, width, height, color)
+  }
+
+  /**
+   * Draw a sprite on the canvas.
+   * @param {ImageInfo} imageInfo - Information about the sprite to draw.
+   */
+  drawImage({ image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight }) {
+    this.#buffer.drawImage(
+      image,
+      sx,
+      sy,
+      sWidth,
+      sHeight,
+      dx,
+      dy,
+      dWidth,
+      dHeight
+    )
+  }
+
+  /**
+   * Set the onscreen canvas's width and height to fit into an available space,
+   * while maintaining a given aspect ratio.
+   * @param {number} availableWidth - in pixels.
+   * @param {number} availableHeight - in pixels.
+   * @param {number} aspectRatio - width / height
+   */
+  resizeCanvas(availableWidth, availableHeight, aspectRatio) {
+    let newWidth = availableWidth
+    let newHeight = availableHeight
+
+    if (availableWidth / availableHeight > aspectRatio) {
+      newWidth = aspectRatio * availableHeight
+    } else {
+      newHeight = availableWidth / aspectRatio
+    }
+
+    this.#ctx.canvas.width = newWidth
+    this.#ctx.canvas.height = newHeight
+
+    this.#ctx.imageSmoothingEnabled = false
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BrushProjectile.html">BrushProjectile</a></li><li><a href="Controller.html">Controller</a></li><li><a href="Engine.html">Engine</a></li><li><a href="Game.html">Game</a></li><li><a href="GameObject.html">GameObject</a></li><li><a href="GameWorld.html">GameWorld</a></li><li><a href="GoalObject.html">GoalObject</a></li><li><a href="Level.html">Level</a></li><li><a href="Platform.html">Platform</a></li><li><a href="Player.html">Player</a></li><li><a href="Renderer.html">Renderer</a></li><li><a href="Sprite.html">Sprite</a></li><li><a href="Treat.html">Treat</a></li></ul><h3>Global</h3><ul><li><a href="global.html#availableLevels">availableLevels</a></li><li><a href="global.html#controller">controller</a></li><li><a href="global.html#currentLevel">currentLevel</a></li><li><a href="global.html#decrementLevel">decrementLevel</a></li><li><a href="global.html#deleteDataBtn">deleteDataBtn</a></li><li><a href="global.html#deleteSavedData">deleteSavedData</a></li><li><a href="global.html#engine">engine</a></li><li><a href="global.html#game">game</a></li><li><a href="global.html#gameOver">gameOver</a></li><li><a href="global.html#handleInputEvent">handleInputEvent</a></li><li><a href="global.html#handleResize">handleResize</a></li><li><a href="global.html#helpBtn">helpBtn</a></li><li><a href="global.html#helpToggle">helpToggle</a></li><li><a href="global.html#incrementLevel">incrementLevel</a></li><li><a href="global.html#initializeLocalData">initializeLocalData</a></li><li><a href="global.html#nextLevelBtn">nextLevelBtn</a></li><li><a href="global.html#prevLevelBtn">prevLevelBtn</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#renderer">renderer</a></li><li><a href="global.html#restart">restart</a></li><li><a href="global.html#restartBtn">restartBtn</a></li><li><a href="global.html#saveLevelData">saveLevelData</a></li><li><a href="global.html#secondsToTimerString">secondsToTimerString</a></li><li><a href="global.html#setLevel">setLevel</a></li><li><a href="global.html#setupLevelButtons">setupLevelButtons</a></li><li><a href="global.html#showPersonalBest">showPersonalBest</a></li><li><a href="global.html#unlockedLevels">unlockedLevels</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#updateTimer">updateTimer</a></li><li><a href="global.html#updateTreats">updateTreats</a></li><li><a href="global.html#updateUnlockedLevels">updateUnlockedLevels</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Fri May 13 2022 00:48:11 GMT-0600 (Mountain Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "bodhi-dreamworld",
+  "version": "1.0.0",
+  "description": "A JS / HTML5 canvas platform game",
+  "main": "main.js",
+  "scripts": {
+    "doc": "jsdoc -c jsdoc.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saulthebear/bodhi-dreamworld.git"
+  },
+  "author": "Stefan Vosloo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saulthebear/bodhi-dreamworld/issues"
+  },
+  "homepage": "https://github.com/saulthebear/bodhi-dreamworld#readme",
+  "devDependencies": {
+    "jsdoc": "^3.6.10"
+  }
+}

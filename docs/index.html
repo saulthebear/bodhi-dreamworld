@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>😻 Bodhi's Dreamworld ☁️</h1>
+<p>Bodhi's Dreamworld is a platform game where you guide Mr. Bodhi Bigglesworth through his dream to collect scattered treats and ultimately get into the big treat jar! Put your jumping and dodging skills to the test as you navigate the platforms and avoid the automated grooming brushes being launched your way.</p>
+<p>This game was created by Stefan Vosloo for project 1 of General Assembly's Software Engineering Immersive.</p>
+<p><a href="https://saulthebear.github.io/bodhi-dreamworld/">🕹 Play the game 🎮</a></p>
+<h2>Table of contents</h2>
+<ul>
+<li><a href="#screenshot">🖼 Screenshot</a></li>
+<li><a href="#overview">👀 Overview</a>
+<ul>
+<li><a href="#the-challenge">🏔 The challenge</a></li>
+<li><a href="#links">🔗 Links</a></li>
+</ul>
+</li>
+<li><a href="#my-process">⚙️ My process</a>
+<ul>
+<li><a href="#built-with">🛠 Built with</a></li>
+<li><a href="#what-i-learned">🧠 What I learned</a></li>
+<li><a href="#resources-referenced">🔎 Resources referenced</a></li>
+</ul>
+</li>
+<li><a href="#author">🧑‍💻 Author</a></li>
+</ul>
+<h2>Screenshot</h2>
+<p><img src="./screenshot.png" alt=""></p>
+<h2>Overview</h2>
+<h3>The challenge</h3>
+<p>Project requirements:</p>
+<ul>
+<li>A game in the browser</li>
+<li>A win condition, upon which the user is informed of winning</li>
+<li>Separate HTML, CSS, and JavaScript files</li>
+<li>JavaScript used for DOM manipulation</li>
+<li>Clean and DRY code</li>
+<li>The game should be deployed publicly</li>
+<li>Instructions should included</li>
+</ul>
+<p>Personal Goals:</p>
+<ul>
+<li>Minimum Viable Product (MVP)
+<ul>
+<li>[x] Create a movable player character</li>
+<li>[x] Let character jump</li>
+<li>[x] Create platforms to jump over / onto</li>
+<li>[x] A goal that when reached ends the level</li>
+<li>[x] Display a level timer -- The goal is to see how quickly you can complete the level</li>
+<li>[x] A restart button</li>
+<li>[x] A button to show instructions</li>
+</ul>
+</li>
+<li>Stretch Goals:
+<ul>
+<li>[x] Add obstacles
+<ul>
+<li>[x] A machine that shoots out brushes - Getting dazes the player for a few seconds</li>
+<li>[ ] A treadmill moving in the opposite direction of desired travel</li>
+<li>[ ] A shower that intermittently turns on. Getting wet slows the player down</li>
+<li>[ ] A timed dryer. If the player gets sucked in, they'll have to wait for the dryer to finish its cycle before it opens up</li>
+</ul>
+</li>
+<li>[x] Animated sprites</li>
+<li>[x] Extra treats to collect along the way</li>
+<li>[x] Multiple levels</li>
+<li>[x] Let user select level</li>
+<li>[x] Heads up display</li>
+<li>[ ] Have viewport move with character, so that the whole level isn't visible at once</li>
+<li>[ ] Double jumping / wall jumping for harder obstacles</li>
+<li>[x] Favicon</li>
+</ul>
+</li>
+</ul>
+<h3>Links</h3>
+<ul>
+<li>Live Site URL: <a href="https://saulthebear.github.io/bodhi-dreamworld/">Github Pages</a></li>
+<li>Original Project Pitch and Wireframes: <a href="./Project%20Pitch.md">Github README</a></li>
+</ul>
+<h2>My process</h2>
+<h3>Built with</h3>
+<ul>
+<li>
+<p>Vanilla JavaScript (no third-party libraries)</p>
+</li>
+<li>
+<p>HTML5 canvas</p>
+</li>
+<li>
+<p>CSS</p>
+</li>
+<li>
+<p>An Object Oriented approach was used</p>
+<ul>
+<li>A MVC pattern was used, dividing main responsibilities between a Game, Renderer, and Controller class</li>
+<li>Classes are loosely coupled</li>
+<li>Code is modular and expandable</li>
+<li>Inheritance is shallow - only 1 level deep at most</li>
+</ul>
+</li>
+</ul>
+<h3>What I learned</h3>
+<p>This project taught me a lot about organizing my code and the importance of loose coupling. Starting with this approach helped me immensely in being able to expand and extend the game quickly after developing the MVP.</p>
+<p>I also learned a lot about game development and animation in general. Having never developed any games or animated anything before, I had to learn about rendering and update loops from scratch. I implemented a fixed time step engine (relying heavily on Jake Gordon and Frank Poth's guides linked in the resources section), which keeps the game running at a consistent speed regardless of the machine it runs on. I also learned how to use sprite sheets to create an animated character.</p>
+<p>I am very happy that I was able to implement a level map editor. This consisted of a simple multi-line string which is then parsed to determine the size of the game world as well as the placement of game objects. This allowed me to quickly add multiple levels, and easily test and tweak them. The level map strings are designed to be both human readable and easily parsable by the computer. To continue building on this I would love to extend it to be able to determine both the width and height of objects. The way it works at the moment is by reading the file one line at a time, determining an object's x and y position and its width, but the height is just set to the block height of a single line.</p>
+<pre class="prettyprint source lang-js"><code>export const level1Map = `
+**************************
+*                        *
+*                        *
+*                        *
+* !!  $                  *
+*     =                  *
+*======  ===             *
+*               $        *
+*                    $   *
+*                        *
+*              ====      *
+* $       =             $*
+*======  ==            ==*
+*                        *
+*                        *
+*>                       *
+*                        *
+*         $    ==========*
+*         ==             *
+*                        *
+*   ====                 *
+*                        *
+*                        *
+*  $   $                 *
+*=======                 *
+*          =====         *
+*           ==== $       *
+*           =======      *
+*                       $*
+*                     ===*
+*       $      $      ===*
+*       ==     ==   =====*
+*p      ==     ==   =====*
+*========================*
+**************************
+`
+</code></pre>
+<p>I struggled with getting text to render sharply on the canvas. I assume this has to do with the relatively small dimensions I used for my canvas leading to a low resolution. This worked well for the pixel art style of the game, but didn't work well for rendering text. I managed to work around this problem by overlaying HTML elements on the canvas. This allowed me to create a HUD (heads-up display), to show the user their level time as well as how many treats they have collected and how many remain. It also allowed me to overlay text on the screen when a user completes a level, informing them of their success.</p>
+<p>I'm also very pleased to be have been able to implement a way of locking levels until a user has fully completed a previous level (ie. collected 100% of the treats). This was achieved by using the browser's local storage API. This approach has the advantage of persisting even after the user refreshes or closes the tab/window. I combined the tracking of whether a level was unlocked with tracking and displaying of a user's best time on a level to give returning players an added challenge to aim for. The disadvantage of this approach is that a tech-savvy user can easily manipulate this data, however this only affects their own game and is not a big deal.</p>
+<p>There are several stretch goals that I have not reached yet, allowing for building on this game in the future. The biggest missing stretch goal is adding all the obstacles I had in my original project pitch.</p>
+<h3>Resources referenced</h3>
+<ul>
+<li><a href="https://codeincomplete.com/articles/javascript-game-foundations-the-game-loop/">Javascript Game Foundations - The Game Loop - Jake Gordon</a> - This resource really helped me understand how to implement my game engine and how it works with requestAnimationFrame</li>
+<li><a href="https://www.youtube.com/watch?v=w-OKdSHRlfA">Create a Platformer Game with JavaScript - Frank Poth</a> - This video showed me how to divide my code using an MVP approach and how to implement a fixed time step engine.</li>
+<li><a href="http://higherorderfun.com/blog/2012/05/20/the-guide-to-implementing-2d-platformers/">The guide to implementing 2D platformers - Rodrigo Monteiro</a> - This showed me how to implement character movement and collisions</li>
+<li><a href="https://www.youtube.com/watch?v=4q2vvZn5aoo">HTML5 Canvas and JavaScript Mario Game Tutorial - Christopher Lis</a> - This video helped me understand how to implement animation</li>
+<li><a href="https://elthen.itch.io/2d-pixel-art-cat-sprites">2D Pixel Art Cat Sprites - Elthen</a> - The sprite sheet I used for the player</li>
+</ul>
+<h2>Author</h2>
+<ul>
+<li>Linkedin - <a href="https://www.linkedin.com/in/stefan-vosloo/">Stefan Vosloo</a></li>
+<li>Twitter - <a href="https://www.twitter.com/saulthebear">@saulthebear</a></li>
+</ul></article>
+    </section>
+
+
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>main.js</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p><code>main.js</code> is the JavaScript entry point for this game</p></div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>Stefan Vosloo</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line6">line 6</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://saulthebear.github.io/bodhi-dreamworld/">Play the game!</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BrushProjectile.html">BrushProjectile</a></li><li><a href="Controller.html">Controller</a></li><li><a href="Engine.html">Engine</a></li><li><a href="Game.html">Game</a></li><li><a href="GameObject.html">GameObject</a></li><li><a href="GameWorld.html">GameWorld</a></li><li><a href="GoalObject.html">GoalObject</a></li><li><a href="Level.html">Level</a></li><li><a href="Platform.html">Platform</a></li><li><a href="Player.html">Player</a></li><li><a href="Renderer.html">Renderer</a></li><li><a href="Sprite.html">Sprite</a></li><li><a href="Treat.html">Treat</a></li></ul><h3>Global</h3><ul><li><a href="global.html#availableLevels">availableLevels</a></li><li><a href="global.html#controller">controller</a></li><li><a href="global.html#currentLevel">currentLevel</a></li><li><a href="global.html#decrementLevel">decrementLevel</a></li><li><a href="global.html#deleteDataBtn">deleteDataBtn</a></li><li><a href="global.html#deleteSavedData">deleteSavedData</a></li><li><a href="global.html#engine">engine</a></li><li><a href="global.html#game">game</a></li><li><a href="global.html#gameOver">gameOver</a></li><li><a href="global.html#handleInputEvent">handleInputEvent</a></li><li><a href="global.html#handleResize">handleResize</a></li><li><a href="global.html#helpBtn">helpBtn</a></li><li><a href="global.html#helpToggle">helpToggle</a></li><li><a href="global.html#incrementLevel">incrementLevel</a></li><li><a href="global.html#initializeLocalData">initializeLocalData</a></li><li><a href="global.html#nextLevelBtn">nextLevelBtn</a></li><li><a href="global.html#prevLevelBtn">prevLevelBtn</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#renderer">renderer</a></li><li><a href="global.html#restart">restart</a></li><li><a href="global.html#restartBtn">restartBtn</a></li><li><a href="global.html#saveLevelData">saveLevelData</a></li><li><a href="global.html#secondsToTimerString">secondsToTimerString</a></li><li><a href="global.html#setLevel">setLevel</a></li><li><a href="global.html#setupLevelButtons">setupLevelButtons</a></li><li><a href="global.html#showPersonalBest">showPersonalBest</a></li><li><a href="global.html#unlockedLevels">unlockedLevels</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#updateTimer">updateTimer</a></li><li><a href="global.html#updateTreats">updateTreats</a></li><li><a href="global.html#updateUnlockedLevels">updateUnlockedLevels</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Fri May 13 2022 00:48:11 GMT-0600 (Mountain Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
