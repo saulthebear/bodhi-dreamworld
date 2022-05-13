@@ -424,7 +424,6 @@ function saveLevelData(levelNumber, time, isLevelCompleted) {
   // Unlock next level if current level has been completed
   if (isLevelCompleted) {
     const nextLevelData = allLevelData[levelNumber + 1]
-    console.log(nextLevelData)
     if (nextLevelData) {
       nextLevelData.unlocked = true
       allLevelData[levelNumber + 1] = nextLevelData
