@@ -48,11 +48,14 @@ export class Platform extends GameObject {
       if (this.#randomImageX < 0) this.#randomImageX = 0
     }
 
+    // Prevent sWidth being 0 when platform's width is exactly 144
+    const sWidth = this.width === 144 ? 144 : this.width % 144
+
     return {
       image: this.image,
       sx: this.#randomImageX,
       sy: 0,
-      sWidth: this.width % 144,
+      sWidth: sWidth,
       sHeight: 6,
       dx: this.x,
       dy: this.y,
